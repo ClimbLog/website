@@ -99,6 +99,7 @@
       border-radius: var(--radius);
       padding: 1.4rem 1.6rem;
       margin-bottom: 2rem;
+      overflow: hidden;
     }
 
     .toc h2 {
@@ -111,13 +112,26 @@
     }
 
     .toc ol {
-      list-style: decimal;
-      padding-left: 1.2rem;
-      columns: 2;
-      column-gap: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(8, auto);
+      grid-auto-flow: column;
+      list-style: none;
+      padding: 0;
+      gap: 0.35rem 2rem;
+      counter-reset: toc-item;
     }
 
-    .toc li { margin-bottom: 0.35rem; break-inside: avoid; }
+    .toc li {
+      margin-bottom: 0;
+      counter-increment: toc-item;
+    }
+
+    .toc li::before {
+      content: counter(toc-item) ".\00a0";
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
 
     .toc a {
       font-size: 0.85rem;
@@ -214,7 +228,11 @@
     .footer-links { margin-bottom: 0.8rem; }
 
     @media (max-width: 560px) {
-      .toc ol { columns: 1; }
+      .toc ol {
+        grid-template-columns: 1fr;
+        grid-template-rows: unset;
+        grid-auto-flow: row;
+      }
       .article { padding: 1.5rem; }
     }
   </style>
