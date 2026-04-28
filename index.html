@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClimbLog — Your Personal Flight Logbook</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B3A6B;
+      --sky: #3A7FD5;
+      --sky-light: #EBF2FC;
+      --accent: #E8A020;
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text: #1E2D45;
+      --muted: #5A6A80;
+      --border: #D6E1EE;
+      --radius: 10px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-brand svg { opacity: 0.9; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, var(--navy) 0%, #2A5298 55%, #3A7FD5 100%);
+      color: #fff;
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Ccircle cx='300' cy='300' r='280' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='220' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='160' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='100' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3Cline x1='300' y1='20' x2='300' y2='580' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3Cline x1='20' y1='300' x2='580' y2='300' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") center/cover;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; max-width: 680px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.82);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .download-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--radius);
+      padding: 11px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .store-btn:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .store-btn svg { flex-shrink: 0; }
+
+    /* FEATURES */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 6px 24px rgba(27,58,107,0.1);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--sky-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon svg { color: var(--sky); }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* STATS */
+    .stats-band {
+      background: var(--navy);
+      color: #fff;
+      padding: 3.5rem 2rem;
+    }
+
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--sky-light);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .cta-section .section-title { margin-bottom: 1rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 2rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      margin: 0 0.6rem;
+    }
+
+    footer a:hover { color: #fff; }
+
+    .footer-inner { max-width: 900px; margin: 0 auto; }
+    .footer-links { margin-bottom: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      ClimbLog
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="delete-account.html">Account</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✈ Aviation Logbook</div>
+      <h1>Your flights.<br><span>Your logbook.</span><br>Always with you.</h1>
+      <p>ClimbLog is the modern pilot's logbook — log every flight, track your hours, and keep your records audit-ready from your phone.</p>
+      <div class="download-btns">
+        <a href="#" class="store-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="#" class="store-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.66-2.76-10.8 9.76zM20.49 10.56L17.6 8.86l-3.01 2.93 3.01 3.11 2.91-1.69a1.9 1.9 0 0 0 0-3.31-.26-.15-.03-.34zM2.18.26a2.06 2.06 0 0 0-.18.85v21.78c0 .31.07.6.18.85l.09.08 12.2-12.2v-.29L2.27.18l-.09.08zM16.14 14.05L3.67 21.24l-.09.07.49.43 12.47-7.19-2.66-2.76 2.26 2.26z"/></svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Everything a pilot needs</h2>
+      <p class="section-sub">Built for student pilots and seasoned aviators alike. Simple to use, powerful when you need it.</p>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Quick Flight Entry</h3>
+          <p>Log a flight in seconds. Enter departure and arrival airports, aircraft, date, and flight time — no paperwork required.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Hour Tracking & Totals</h3>
+          <p>Automatically totals PIC, SIC, dual, night, instrument, cross-country, and more — always up to date.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Flight History</h3>
+          <p>Browse your complete logbook with powerful filtering by aircraft, airport, date range, or flight type.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <h3>Logbook Export</h3>
+          <p>Export your logbook to PDF for checkrides, medical exams, or insurance — formatted to FAA standards.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Secure Cloud Sync</h3>
+          <p>Your logbook is safely backed up to the cloud and syncs across all your devices automatically.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 1 21 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 4.93 4.93"/></svg>
+          </div>
+          <h3>Currency Tracking</h3>
+          <p>Stay aware of your recency requirements. ClimbLog tracks landings, IFR currency, and more so nothing slips.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Flights Logged</div>
+      </div>
+      <div>
+        <div class="stat-num">iOS & Android</div>
+        <div class="stat-label">Platform Support</div>
+      </div>
+      <div>
+        <div class="stat-num">FAA</div>
+        <div class="stat-label">Formatted Exports</div>
+      </div>
+      <div>
+        <div class="stat-num">Free</div>
+        <div class="stat-label">to Get Started</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="section-label">Download Now</div>
+      <h2 class="section-title">Ready for takeoff?</h2>
+      <p>Available free on the App Store and Google Play.</p>
+      <div class="download-btns">
+        <a href="#" class="store-btn" style="background:var(--navy);border-color:var(--navy);color:#fff;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download on the App Store
+        </a>
+        <a href="#" class="store-btn" style="background:var(--sky);border-color:var(--sky);color:#fff;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.66-2.76-10.8 9.76zM20.49 10.56L17.6 8.86l-3.01 2.93 3.01 3.11 2.91-1.69a1.9 1.9 0 0 0 0-3.31-.26-.15-.03-.34zM2.18.26a2.06 2.06 0 0 0-.18.85v21.78c0 .31.07.6.18.85l.09.08 12.2-12.2v-.29L2.27.18l-.09.08zM16.14 14.05L3.67 21.24l-.09.07.49.43 12.47-7.19-2.66-2.76 2.26 2.26z"/></svg>
+          Get it on Google Play
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="delete-account.html">Delete Account</a>
+      </div>
+      <div>&copy; 2026 KeyQueue LLC &mdash; ClimbLog is a registered trademark of KeyQueue LLC.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

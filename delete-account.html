@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Account — ClimbLog</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B3A6B;
+      --sky: #3A7FD5;
+      --sky-light: #EBF2FC;
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text: #1E2D45;
+      --muted: #5A6A80;
+      --border: #D6E1EE;
+      --danger: #C0392B;
+      --danger-light: #FDF2F0;
+      --danger-border: #F5C6C1;
+      --radius: 10px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .card-wrapper {
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(27,58,107,0.07);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--navy) 0%, #2A5298 100%);
+      padding: 2.4rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .card-header .icon-ring {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+    }
+
+    .card-header h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card-header p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .notice {
+      background: var(--danger-light);
+      border: 1px solid var(--danger-border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.8rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .notice-icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--danger);
+    }
+
+    .notice p {
+      font-size: 0.87rem;
+      color: #7B2020;
+      line-height: 1.5;
+    }
+
+    .steps-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1rem;
+    }
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--sky-light);
+      border: 1.5px solid #C0D8F5;
+      color: var(--sky);
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text strong {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.15rem;
+    }
+
+    .step-text span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.8rem 0;
+    }
+
+    .help-block {
+      background: var(--sky-light);
+      border: 1px solid #C0D8F5;
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .help-block-icon {
+      flex-shrink: 0;
+      color: var(--sky);
+      margin-top: 2px;
+    }
+
+    .help-block p {
+      font-size: 0.85rem;
+      color: #1E4080;
+      line-height: 1.55;
+    }
+
+    .help-block a {
+      color: var(--sky);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .help-block a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      margin: 0 0.6rem;
+    }
+
+    footer a:hover { color: #fff; }
+    .footer-inner { max-width: 900px; margin: 0 auto; }
+    .footer-links { margin-bottom: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      ClimbLog
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="delete-account.html" class="active">Account</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="card-wrapper">
+      <div class="card">
+
+        <div class="card-header">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h1>Delete Your Account</h1>
+          <p>Account deletion is handled directly in the ClimbLog app.</p>
+        </div>
+
+        <div class="card-body">
+
+          <div class="notice">
+            <div class="notice-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <p>Account deletion is permanent and cannot be undone. All of your flight logs, settings, and personal data will be removed from our systems.</p>
+          </div>
+
+          <div class="steps-label">How to delete your account</div>
+
+          <ol class="steps">
+            <li class="step">
+              <div class="step-num">1</div>
+              <div class="step-text">
+                <strong>Open ClimbLog</strong>
+                <span>Launch the app on your iOS or Android device.</span>
+              </div>
+            </li>
+            <li class="step">
+              <div class="step-num">2</div>
+              <div class="step-text">
+                <strong>Go to Settings</strong>
+                <span>Tap the profile icon or navigate to the Settings menu.</span>
+              </div>
+            </li>
+            <li class="step">
+              <div class="step-num">3</div>
+              <div class="step-text">
+                <strong>Select "Account"</strong>
+                <span>Find the Account section within your settings.</span>
+              </div>
+            </li>
+            <li class="step">
+              <div class="step-num">4</div>
+              <div class="step-text">
+                <strong>Tap "Delete Account"</strong>
+                <span>Confirm your decision when prompted to permanently delete your account and all associated data.</span>
+              </div>
+            </li>
+          </ol>
+
+          <hr class="divider" />
+
+          <div class="help-block">
+            <div class="help-block-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <p>Need help? If you're having trouble accessing your account or need assistance with the deletion process, please review our <a href="privacy.html">Privacy Policy</a> or contact KeyQueue LLC for support.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="delete-account.html">Delete Account</a>
+      </div>
+      <div>&copy; 2026 KeyQueue LLC &mdash; ClimbLog is a registered trademark of KeyQueue LLC.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
