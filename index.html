@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClimbLog — Your Personal Flight Logbook</title>
+  <title>ClimbLog — Track Your Flights, Map Your World</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -222,6 +222,76 @@
       line-height: 1.55;
     }
 
+    .story-panel {
+      margin-top: 3rem;
+      background: linear-gradient(145deg, #ffffff 0%, #f2f6fc 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .story-panel h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 0.8rem;
+    }
+
+    .story-panel p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .story-list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .story-list li {
+      color: var(--text);
+      font-size: 0.95rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+
+    .story-list li::before {
+      content: '•';
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      top: -0.05rem;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .story-metrics {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 16px;
+      padding: 1.6rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .story-metric strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.4rem;
+      line-height: 1.1;
+      margin-bottom: 0.15rem;
+    }
+
+    .story-metric span {
+      color: rgba(255,255,255,0.76);
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+    }
+
     /* STATS */
     .stats-band {
       background: var(--navy);
@@ -284,6 +354,12 @@
 
     .footer-inner { max-width: 900px; margin: 0 auto; }
     .footer-links { margin-bottom: 0.8rem; }
+
+    @media (max-width: 820px) {
+      .story-panel {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -306,9 +382,9 @@
 
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">✈ Aviation Logbook</div>
-      <h1>Your flights.<br><span>Your logbook.</span><br>Always with you.</h1>
-      <p>ClimbLog is the modern pilot's logbook — log every flight, track your hours, and keep your records audit-ready from your phone.</p>
+      <div class="hero-badge">Track Every Flight</div>
+      <h1>Your travel life,<br><span>mapped and remembered.</span></h1>
+      <p>ClimbLog is the personal flight tracker for people who want more than a spreadsheet. Log your flights, build your route map, follow upcoming trips, share your Flight Passport, and see your travel story come together.</p>
       <div class="download-btns">
         <a href="#" class="store-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -325,8 +401,8 @@
   <section class="section">
     <div class="section-inner">
       <div class="section-label">Features</div>
-      <h2 class="section-title">Everything a pilot needs</h2>
-      <p class="section-sub">Built for student pilots and seasoned aviators alike. Simple to use, powerful when you need it.</p>
+      <h2 class="section-title">Built for people who love flying, not filing paperwork</h2>
+      <p class="section-sub">ClimbLog helps you keep your entire flight history in one place, from your very first trip to the routes you are taking next month.</p>
 
       <div class="features-grid">
 
@@ -334,50 +410,77 @@
           <div class="feature-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
-          <h3>Quick Flight Entry</h3>
-          <p>Log a flight in seconds. Enter departure and arrival airports, aircraft, date, and flight time — no paperwork required.</p>
+          <h3>Your Personal Flight Log</h3>
+          <p>Save every flight with airports, airline, aircraft, date, seat details, and notes. Your travel history stays organized and easy to revisit.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
-          <h3>Hour Tracking & Totals</h3>
-          <p>Automatically totals PIC, SIC, dual, night, instrument, cross-country, and more — always up to date.</p>
+          <h3>Route Map and Globe View</h3>
+          <p>See your routes come alive on a world map, then zoom out to a globe view that makes long-haul flights feel as dramatic as they should.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
-          <h3>Flight History</h3>
-          <p>Browse your complete logbook with powerful filtering by aircraft, airport, date range, or flight type.</p>
+          <h3>Stats, Milestones, and Trends</h3>
+          <p>Track flights, miles, countries, airports, aircraft, longest routes, best year, and more without doing any manual math.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </div>
-          <h3>Logbook Export</h3>
-          <p>Export your logbook to PDF for checkrides, medical exams, or insurance — formatted to FAA standards.</p>
+          <h3>Upcoming Flights</h3>
+          <p>Keep future trips separate from your history, so you can watch what is coming up next and open route details before you even take off.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Secure Cloud Sync</h3>
-          <p>Your logbook is safely backed up to the cloud and syncs across all your devices automatically.</p>
+          <h3>Flight Passport Sharing</h3>
+          <p>Create a polished share card from your travel data, complete with your route map, countries visited, and signature passport-inspired styling.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 1 21 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 4.93 4.93"/></svg>
           </div>
-          <h3>Currency Tracking</h3>
-          <p>Stay aware of your recency requirements. ClimbLog tracks landings, IFR currency, and more so nothing slips.</p>
+          <h3>Friends and Shared Routes</h3>
+          <p>Follow friends, compare where you have both flown, and browse upcoming trips in a feed that makes the social side of flying actually fun.</p>
         </div>
 
+      </div>
+
+      <div class="story-panel">
+        <div>
+          <h3>ClimbLog turns flight history into something you will actually want to keep opening</h3>
+          <p>Most flight trackers stop at storing data. ClimbLog is designed to make that data feel alive, whether you care most about your map, your miles, your countries, your future trips, or the people you fly alongside.</p>
+          <ul class="story-list">
+            <li>Build a complete archive of every route you have flown</li>
+            <li>See your home airport, favorite airlines, and top countries at a glance</li>
+            <li>Compare overlap with friends and discover shared routes</li>
+            <li>Keep one clean home for both past flights and upcoming ones</li>
+          </ul>
+        </div>
+        <div class="story-metrics">
+          <div class="story-metric">
+            <strong>One timeline</strong>
+            <span>Past flights, future flights, and milestones all in one place</span>
+          </div>
+          <div class="story-metric">
+            <strong>One map</strong>
+            <span>Your routes, your home airport, and your world as it grows</span>
+          </div>
+          <div class="story-metric">
+            <strong>One identity</strong>
+            <span>A Flight Passport you can actually share with pride</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -385,20 +488,20 @@
   <div class="stats-band">
     <div class="stats-inner">
       <div>
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Flights Logged</div>
+        <div class="stat-num">Route Maps</div>
+        <div class="stat-label">See your travel life geographically</div>
       </div>
       <div>
-        <div class="stat-num">iOS & Android</div>
-        <div class="stat-label">Platform Support</div>
+        <div class="stat-num">Flight Passport</div>
+        <div class="stat-label">Shareable travel identity cards</div>
       </div>
       <div>
-        <div class="stat-num">FAA</div>
-        <div class="stat-label">Formatted Exports</div>
+        <div class="stat-num">Friends Feed</div>
+        <div class="stat-label">See who is flying where next</div>
       </div>
       <div>
-        <div class="stat-num">Free</div>
-        <div class="stat-label">to Get Started</div>
+        <div class="stat-num">iOS + Android</div>
+        <div class="stat-label">Take your history anywhere</div>
       </div>
     </div>
   </div>
@@ -406,8 +509,8 @@
   <section class="cta-section">
     <div class="section-inner">
       <div class="section-label">Download Now</div>
-      <h2 class="section-title">Ready for takeoff?</h2>
-      <p>Available free on the App Store and Google Play.</p>
+      <h2 class="section-title">Start building your flight history</h2>
+      <p>Whether you fly a few times a year or plan whole life eras around airports, ClimbLog gives your travel story a place to live.</p>
       <div class="download-btns">
         <a href="#" class="store-btn" style="background:var(--navy);border-color:var(--navy);color:#fff;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
