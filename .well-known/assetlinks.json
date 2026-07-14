@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.climblog.app",
+      "sha256_cert_fingerprints": ["DA:C8:F5:41:4F:5D:0A:34:48:80:EA:E4:A4:7E:D3:C7:E9:81:2E:BC:5B:F3:A6:12:C3:46:97:C5:3F:D9:8C:9A"]
+    }
+  }
+]
