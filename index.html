@@ -3,539 +3,630 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClimbLog — Track Your Flights, Map Your World</title>
+
+  <title>ClimbLog — Your travel life, mapped and remembered</title>
+  <meta name="description" content="ClimbLog is the personal flight log for people who fly. Log every flight, build your route map, track upcoming trips, and share your Flight Passport. iOS and Android." />
+  <link rel="canonical" href="https://climblog.co/" />
+  <meta name="theme-color" content="#242434" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ClimbLog" />
+  <meta property="og:url" content="https://climblog.co/" />
+  <meta property="og:title" content="ClimbLog — Your travel life, mapped and remembered" />
+  <meta property="og:description" content="Log every flight, build your route map, and share your Flight Passport." />
+  <meta property="og:image" content="https://climblog.co/assets/img/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ClimbLog — Your travel life, mapped and remembered" />
+  <meta name="twitter:description" content="Log every flight, build your route map, and share your Flight Passport." />
+  <meta name="twitter:image" content="https://climblog.co/assets/img/og.png" />
+
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" />
+  <link rel="icon" href="/assets/img/icon-512.png" sizes="512x512" />
+  <link rel="apple-touch-icon" href="/assets/img/icon-180.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" />
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+
+  <!-- Set theme before first paint so there is no flash of the wrong scheme. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('cl-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #1B3A6B;
-      --sky: #3A7FD5;
-      --sky-light: #EBF2FC;
-      --accent: #E8A020;
-      --bg: #F7F9FC;
-      --surface: #FFFFFF;
-      --text: #1E2D45;
-      --muted: #5A6A80;
-      --border: #D6E1EE;
-      --radius: 10px;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* NAV */
-    nav {
-      background: var(--navy);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-brand svg { opacity: 0.9; }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: rgba(255,255,255,0.82);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
-
-    /* HERO */
+    /* ---- Hero ------------------------------------------------------------ */
     .hero {
-      background: linear-gradient(160deg, var(--navy) 0%, #2A5298 55%, #3A7FD5 100%);
-      color: #fff;
-      padding: 6rem 2rem 5rem;
-      text-align: center;
       position: relative;
       overflow: hidden;
+      padding-block: var(--cl-space-5xl) var(--cl-space-4xl);
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Ccircle cx='300' cy='300' r='280' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='220' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='160' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='100' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3Cline x1='300' y1='20' x2='300' y2='580' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3Cline x1='20' y1='300' x2='580' y2='300' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E") center/cover;
+      inset: -40% -10% auto auto;
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(79,142,247,0.22) 0%, rgba(79,142,247,0) 62%);
       pointer-events: none;
     }
 
-    .hero-content { position: relative; max-width: 680px; margin: 0 auto; }
+    .hero .container {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--cl-space-4xl);
+      align-items: center;
+    }
 
     .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero h1 span { color: var(--accent); }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: rgba(255,255,255,0.82);
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .download-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .store-btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.1);
-      border: 1.5px solid rgba(255,255,255,0.35);
-      color: #fff;
-      text-decoration: none;
-      border-radius: var(--radius);
-      padding: 11px 22px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .store-btn:hover {
-      background: rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.6);
-    }
-
-    .store-btn svg { flex-shrink: 0; }
-
-    /* FEATURES */
-    .section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1060px; margin: 0 auto; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      gap: var(--cl-space-sm);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--cl-radius-full);
+      padding: 6px 14px;
+      font-size: var(--cl-text-xs);
+      font-weight: var(--cl-weight-semibold);
+      letter-spacing: var(--cl-tracking-widest);
       text-transform: uppercase;
-      color: var(--sky);
-      margin-bottom: 0.6rem;
+      color: rgba(240,240,255,0.82);
+      margin-bottom: var(--cl-space-lg);
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--cl-brand);
+      box-shadow: 0 0 0 4px rgba(79,142,247,0.22);
     }
 
-    .section-title {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 0.6rem;
-      letter-spacing: -0.01em;
+    .hero h1 { margin-bottom: var(--cl-space-lg); }
+    .hero h1 em { font-style: normal; color: var(--cl-brand-light); }
+    .hero .lede { font-size: var(--cl-text-lg); margin-bottom: var(--cl-space-2xl); }
+    .hero-note {
+      margin-top: var(--cl-space-lg);
+      font-size: var(--cl-text-sm);
+      color: var(--text-tertiary);
     }
 
-    .section-sub {
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 3rem;
+    /* ---- Phone mockup ---------------------------------------------------- */
+    .phone {
+      justify-self: center;
+      width: min(300px, 78vw);
+      aspect-ratio: 9 / 17;
+      background: #0E0E18;
+      border: 9px solid #101018;
+      border-radius: 42px;
+      box-shadow: 0 40px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.07);
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
     }
 
-    .features-grid {
+    .phone-notch {
+      width: 84px; height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.18);
+      margin: 0 auto 4px;
+    }
+
+    .route-head {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.4rem;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
     }
+    .route-code { font-size: 1.65rem; font-weight: 800; color: #F0F0FF; letter-spacing: -0.03em; }
+    .route-city { font-size: 0.62rem; color: #78789A; letter-spacing: 0.06em; text-transform: uppercase; }
+    .route-arrow { color: var(--cl-brand); }
+    .route-dur { font-size: 0.6rem; color: #78789A; margin-top: 2px; }
 
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      transition: box-shadow 0.2s, transform 0.2s;
+    .mini-map {
+      position: relative;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(79,142,247,0.16), transparent 55%),
+        #1A1A2A;
+      border: 1px solid rgba(255,255,255,0.07);
+      height: 118px;
+      overflow: hidden;
     }
+    .mini-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-    .feature-card:hover {
-      box-shadow: 0 6px 24px rgba(27,58,107,0.1);
-      transform: translateY(-2px);
+    .phone-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 11px;
+      background: #22222F;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 11px;
+      font-size: 0.72rem;
     }
+    .phone-row span:first-child { color: #A0A0C0; }
+    .phone-row span:last-child { color: #F0F0FF; font-weight: 600; }
 
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--sky-light);
-      border-radius: 10px;
+    .status-pill {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 11px;
+      background: rgba(52,199,89,0.12);
+      border: 1px solid rgba(52,199,89,0.3);
+      font-size: 0.7rem;
+      color: #34C759;
+      font-weight: 600;
+    }
+    .status-pill::before {
+      content: '';
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #34C759;
     }
 
-    .feature-icon svg { color: var(--sky); }
-
-    .feature-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.4rem;
-    }
-
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .story-panel {
-      margin-top: 3rem;
-      background: linear-gradient(145deg, #ffffff 0%, #f2f6fc 100%);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2rem;
+    /* ---- Passport band --------------------------------------------------- */
+    .passport-band .container {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2rem;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: var(--cl-space-4xl);
       align-items: center;
     }
 
-    .story-panel h3 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 0.8rem;
-    }
-
-    .story-panel p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .story-list {
-      list-style: none;
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .story-list li {
-      color: var(--text);
-      font-size: 0.95rem;
-      padding-left: 1.4rem;
-      position: relative;
-    }
-
-    .story-list li::before {
-      content: '•';
-      color: var(--accent);
-      position: absolute;
-      left: 0;
-      top: -0.05rem;
-      font-size: 1.2rem;
-      line-height: 1;
-    }
-
-    .story-metrics {
-      background: var(--navy);
+    .passport-card {
+      justify-self: center;
+      width: min(400px, 100%);
+      border-radius: var(--cl-radius-xl);
+      padding: var(--cl-space-xl);
+      background: linear-gradient(150deg, #1C1472 0%, #150F60 60%, #0E0840 100%);
+      border: 1px solid rgba(255,200,64,0.24);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.45);
       color: #fff;
-      border-radius: 16px;
-      padding: 1.6rem;
-      display: grid;
-      gap: 1rem;
     }
 
-    .story-metric strong {
-      display: block;
-      color: var(--accent);
-      font-size: 1.4rem;
-      line-height: 1.1;
-      margin-bottom: 0.15rem;
+    .pc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--cl-space-lg);
     }
-
-    .story-metric span {
-      color: rgba(255,255,255,0.76);
-      font-size: 0.88rem;
-      letter-spacing: 0.03em;
-    }
-
-    /* STATS */
-    .stats-band {
-      background: var(--navy);
-      color: #fff;
-      padding: 3.5rem 2rem;
-    }
-
-    .stats-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-
-    /* CTA */
-    .cta-section {
-      background: var(--sky-light);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    .cta-section .section-title { margin-bottom: 1rem; }
-    .cta-section p { color: var(--muted); margin-bottom: 2rem; }
-
-    /* FOOTER */
-    footer {
-      background: var(--navy);
+    .pc-doc {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: rgba(255,255,255,0.55);
-      padding: 2rem;
+    }
+    .pc-name { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 3px; }
+    .pc-handle { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
+    .pc-seal {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,200,64,0.6);
+      display: grid; place-items: center;
+      color: var(--cl-passport-gold);
+      flex-shrink: 0;
+    }
+
+    .pc-map {
+      height: 132px;
+      border-radius: var(--cl-radius-lg);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      margin-bottom: var(--cl-space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .pc-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    .pc-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--cl-space-sm);
+      padding-bottom: var(--cl-space-lg);
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+      margin-bottom: var(--cl-space-md);
+    }
+    .pc-stat strong { display: block; font-size: 1.15rem; font-weight: 700; line-height: 1.1; }
+    .pc-stat span {
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .pc-mrz {
+      font-family: var(--cl-font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.09em;
+      color: var(--cl-passport-gold);
+      word-break: break-all;
+      line-height: 1.7;
+    }
+
+    /* ---- Altitude band --------------------------------------------------- */
+    /* In dark mode every band collapses toward the same charcoal, so this one
+       carries its own deeper base plus a gold wash to stay distinguishable. */
+    .altitude-band {
+      position: relative;
+      overflow: hidden;
+      --bg: #15151F;
+    }
+    .altitude-band::before {
+      content: '';
+      position: absolute;
+      inset: auto auto -55% -12%;
+      width: 760px; height: 760px;
+      background: radial-gradient(circle, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0) 64%);
+      pointer-events: none;
+    }
+    .altitude-band .container { position: relative; }
+
+    .altitude-band .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--cl-space-4xl);
+      align-items: center;
+    }
+
+    .alt-list { list-style: none; display: grid; gap: var(--cl-space-md); }
+    .alt-list li {
+      display: flex;
+      gap: var(--cl-space-md);
+      align-items: flex-start;
+      font-size: var(--cl-text-base);
+      color: var(--text-secondary);
+    }
+    .alt-list svg { color: var(--cl-altitude); flex-shrink: 0; margin-top: 3px; }
+    .alt-list b { color: var(--text); font-weight: var(--cl-weight-semibold); }
+
+    /* ---- Value strip ----------------------------------------------------- */
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: var(--cl-space-xl);
       text-align: center;
-      font-size: 0.82rem;
     }
+    .strip h3 { color: var(--accent); font-size: var(--cl-text-lg); margin-bottom: var(--cl-space-xs); }
+    .strip p { font-size: var(--cl-text-base); color: var(--text-secondary); }
 
-    footer a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      margin: 0 0.6rem;
+    /* ---- CTA ------------------------------------------------------------- */
+    .cta { text-align: center; }
+    .cta .lede { margin: 0 auto var(--cl-space-2xl); }
+
+    /* Keep anchored sections clear of the sticky nav. */
+    [id] { scroll-margin-top: calc(var(--cl-nav-height) + var(--cl-space)); }
+
+    /* Hairlines so adjacent bands stay legible as separate bands in dark mode. */
+    .ctx-charcoal, .ctx-altitude, .ctx-passport {
+      border-block: 1px solid rgba(255,255,255,0.07);
     }
+    .hero { border-top: none; }
 
-    footer a:hover { color: #fff; }
-
-    .footer-inner { max-width: 900px; margin: 0 auto; }
-    .footer-links { margin-bottom: 0.8rem; }
-
-    @media (max-width: 820px) {
-      .story-panel {
+    /* ---- Responsive ------------------------------------------------------ */
+    @media (max-width: 900px) {
+      .hero .container,
+      .passport-band .container,
+      .altitude-band .container {
         grid-template-columns: 1fr;
+        gap: var(--cl-space-3xl);
       }
+      .hero { text-align: center; padding-block: var(--cl-space-4xl); }
+      .hero .lede { margin-inline: auto; }
+      .hero .btn-row { justify-content: center; }
+      .passport-card { order: -1; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="nav-brand">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="/" class="nav-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17.8 19.2 16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a.5.5 0 0 0-.5.8l3.2 4-2.2 2.2-2.1-.5a.5.5 0 0 0-.5.8L5 16l2.5 2.3a.5.5 0 0 0 .8-.5l-.5-2.1L10 13.5l4 3.2a.5.5 0 0 0 .8-.5z"/>
       </svg>
       ClimbLog
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="privacy.html">Privacy</a></li>
-      <li><a href="terms.html">Terms</a></li>
-      <li><a href="support.html">Support</a></li>
-      <li><a href="delete-account.html">Account</a></li>
+      <li><a href="/" aria-current="page">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#passport">Passport</a></li>
+      <li><a href="/support.html">Support</a></li>
+      <li>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">Track Every Flight</div>
-      <h1>Your travel life,<br><span>mapped and remembered.</span></h1>
-      <p>ClimbLog is the personal flight tracker for people who want more than a spreadsheet. Log your flights, build your route map, follow upcoming trips, share your Flight Passport, and see your travel story come together.</p>
-      <div class="download-btns">
-        <a href="#" class="store-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          App Store
+<main id="main">
+
+  <!-- ================= HERO — charcoal + brand blue ================= -->
+  <section class="hero ctx-charcoal">
+    <div class="container">
+      <div>
+        <p class="hero-badge">Track every flight</p>
+        <h1>Your travel life,<br /><em>mapped and remembered.</em></h1>
+        <p class="lede">ClimbLog is the personal flight log for people who want more than a spreadsheet. Log every flight, watch your route map grow, follow upcoming trips, and share a Flight Passport that is unmistakably yours.</p>
+
+        <div class="btn-row">
+          <a class="btn btn-primary store-btn" data-store="ios" data-store-label="Download on the">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span><small data-store-note>Coming soon to</small><b>App Store</b></span>
+          </a>
+          <a class="btn btn-ghost store-btn" data-store="android" data-store-label="Get it on">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8a1.9 1.9 0 0 0-.5 1.3v17.8c0 .5.2 1 .5 1.3l.1.1 10-10v-.2l-10-10-.1-.1zm13.4 6.6L5.3 1.7l-.2-.1 9 9 2.9-2.2zM5.1 22.4l.2-.1L17 15.6l-2.9-2.2-9 9zm14.9-9.2 2.4-1.4c.7-.4.7-1.1 0-1.5l-2.4-1.4-3.1 2.2 3.1 2.1z"/></svg>
+            <span><small data-store-note>Coming soon to</small><b>Google Play</b></span>
+          </a>
+        </div>
+
+        <p class="hero-note">Free to use. Altitude unlocks the premium extras.</p>
+      </div>
+
+      <!-- CSS device mockup. Replace with a real capture when store assets are ready. -->
+      <div class="phone" role="img" aria-label="ClimbLog flight detail screen showing an ATL to LHR flight on a route map">
+        <div class="phone-notch"></div>
+
+        <div class="route-head">
+          <div>
+            <div class="route-code">ATL</div>
+            <div class="route-city">Atlanta</div>
+          </div>
+          <div>
+            <svg class="route-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            <div class="route-dur">8h 40m</div>
+          </div>
+          <div>
+            <div class="route-code">LHR</div>
+            <div class="route-city">London</div>
+          </div>
+        </div>
+
+        <div class="mini-map">
+          <svg viewBox="0 0 260 118" preserveAspectRatio="none" aria-hidden="true">
+            <g stroke="rgba(255,255,255,0.06)" fill="none">
+              <path d="M0 34 H260 M0 62 H260 M0 90 H260 M52 0 V118 M130 0 V118 M208 0 V118"/>
+            </g>
+            <path d="M38 88 Q 130 6 224 44" fill="none" stroke="#4F8EF7" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="38" cy="88" r="5" fill="#4F8EF7"/>
+            <circle cx="224" cy="44" r="5" fill="#4F8EF7"/>
+            <circle cx="152" cy="30" r="3.4" fill="#F0F0FF"/>
+          </svg>
+        </div>
+
+        <div class="status-pill">On time - arriving 07:15</div>
+        <div class="phone-row"><span>Flight</span><span>DL 236</span></div>
+        <div class="phone-row"><span>Airline</span><span>Delta</span></div>
+        <div class="phone-row"><span>Aircraft</span><span>A350-900</span></div>
+        <div class="phone-row"><span>Distance</span><span>4,198 mi</span></div>
+        <div class="phone-row"><span>Seat</span><span>22A - Window</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES — light ================= -->
+  <section class="section" id="features">
+    <div class="container">
+      <p class="eyebrow">Features</p>
+      <h2>Built for people who love flying, not filing paperwork</h2>
+      <p class="lede" style="margin-bottom: var(--cl-space-3xl)">Your whole flight history in one place, from the first trip you can remember to the route you are taking next month.</p>
+
+      <div class="grid">
+        <article class="card card-hover" data-reveal>
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <h3>Your personal flight log</h3>
+          <p>Save every flight with airports, airline, aircraft, date, seat, and notes. Search it back years later in seconds.</p>
+        </article>
+
+        <article class="card card-hover" data-reveal>
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Route map and globe</h3>
+          <p>Every route you have flown, drawn on a world map you can spin out to a globe. Long-hauls finally look the part.</p>
+        </article>
+
+        <article class="card card-hover" data-reveal>
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <h3>Stats, milestones, and trends</h3>
+          <p>Flights, miles, countries, airports, aircraft types, longest route, best year. No spreadsheet formulas required.</p>
+        </article>
+
+        <article class="card card-hover" data-reveal>
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v14M6 8l6-6 6 6M4 20h16"/></svg>
+          </div>
+          <h3>Upcoming flights</h3>
+          <p>Future trips stay separate from your history, with gates, terminals, and delay status as departure gets close.</p>
+        </article>
+
+        <article class="card card-hover" data-reveal>
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Flight Passport</h3>
+          <p>A share card built from your real travel data, complete with route map, countries, and passport-style detailing.</p>
+        </article>
+
+        <article class="card card-hover" data-reveal>
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Friends and shared routes</h3>
+          <p>Follow friends, compare where you have both flown, and see who is heading somewhere next in a live feed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PASSPORT — indigo + gold ================= -->
+  <section class="section passport-band ctx-passport" id="passport">
+    <div class="container">
+      <div data-reveal>
+        <p class="eyebrow">Flight Passport</p>
+        <h2>A travel identity worth sharing</h2>
+        <p class="lede">Every ClimbLog account builds a Flight Passport from your real history. Countries, miles, home airport, and the shape of your route map, laid out like a travel document. Post it, send it, or keep it to yourself.</p>
+        <div class="btn-row" style="margin-top: var(--cl-space-2xl)">
+          <a class="btn btn-primary" href="#get">Make your Passport</a>
+        </div>
+      </div>
+
+      <div class="passport-card" role="img" aria-label="Example ClimbLog Flight Passport card showing 128 flights, 34 countries, 214,000 miles, and 62 airports">
+        <div class="pc-head">
+          <div>
+            <div class="pc-doc">Flight Passport</div>
+            <div class="pc-name">Alex Rivera</div>
+            <div class="pc-handle">@alexflies - ATL</div>
+          </div>
+          <div class="pc-seal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a.5.5 0 0 0-.5.8l3.2 4-2.2 2.2-2.1-.5a.5.5 0 0 0-.5.8L5 16l2.5 2.3a.5.5 0 0 0 .8-.5l-.5-2.1L10 13.5l4 3.2a.5.5 0 0 0 .8-.5z"/></svg>
+          </div>
+        </div>
+
+        <div class="pc-map">
+          <svg viewBox="0 0 360 132" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="rgba(95,75,215,0.82)">
+              <ellipse cx="72" cy="56" rx="42" ry="27"/>
+              <ellipse cx="96" cy="99" rx="20" ry="24"/>
+              <ellipse cx="176" cy="46" rx="26" ry="17"/>
+              <ellipse cx="188" cy="88" rx="24" ry="26"/>
+              <ellipse cx="256" cy="52" rx="46" ry="27"/>
+              <ellipse cx="310" cy="104" rx="22" ry="15"/>
+            </g>
+            <g fill="none" stroke="#FFD700" stroke-width="1.7" stroke-linecap="round" opacity="0.95">
+              <path d="M70 58 Q 130 18 176 44"/>
+              <path d="M176 44 Q 220 20 258 48"/>
+              <path d="M70 58 Q 120 104 186 88"/>
+              <path d="M258 48 Q 296 74 310 102"/>
+            </g>
+            <g fill="#FFD700">
+              <circle cx="70" cy="58" r="3.2"/><circle cx="176" cy="44" r="3.2"/>
+              <circle cx="258" cy="48" r="3.2"/><circle cx="186" cy="88" r="3.2"/>
+              <circle cx="310" cy="102" r="3.2"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="pc-stats">
+          <div class="pc-stat"><strong>128</strong><span>Flights</span></div>
+          <div class="pc-stat"><strong>34</strong><span>Countries</span></div>
+          <div class="pc-stat"><strong>214K</strong><span>Miles</span></div>
+          <div class="pc-stat"><strong>62</strong><span>Airports</span></div>
+        </div>
+
+        <div class="pc-mrz">P&lt;USARIVERA&lt;&lt;ALEX&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;ATL<br />CLIMBLOG&lt;&lt;128F&lt;&lt;34C&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;214K</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ALTITUDE — gold ================= -->
+  <section class="section altitude-band ctx-altitude">
+    <div class="container">
+      <div data-reveal>
+        <p class="eyebrow">Altitude</p>
+        <h2>Go further with Altitude</h2>
+        <p class="lede">ClimbLog is free and stays useful without paying. Altitude is for the people who fly enough to want the extras.</p>
+      </div>
+
+      <ul class="alt-list" data-reveal>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Friend flight alerts.</b> Follow a friend's flight and get notified when it departs, diverts, or lands.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Historical flight lookup.</b> Pull in flights from years back, not just the recent window.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Satellite and globe maps.</b> Higher-fidelity map styles for the views worth showing off.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Alternate app icons and the gold ring.</b> Small things, but you will know.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= VALUE STRIP — light ================= -->
+  <section class="section-tight section">
+    <div class="container">
+      <div class="strip">
+        <div data-reveal><h3>One timeline</h3><p>Past flights, upcoming trips, and milestones in a single place.</p></div>
+        <div data-reveal><h3>One map</h3><p>Your routes, your home airport, and your world as it grows.</p></div>
+        <div data-reveal><h3>One identity</h3><p>A Flight Passport you can actually share with pride.</p></div>
+        <div data-reveal><h3>Two platforms</h3><p>iOS and Android, with your history synced across both.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA — charcoal ================= -->
+  <section class="section cta ctx-charcoal" id="get">
+    <div class="container">
+      <p class="eyebrow">Get started</p>
+      <h2>Start building your flight history</h2>
+      <p class="lede">Whether you fly twice a year or plan whole life eras around airports, ClimbLog gives your travel story somewhere to live.</p>
+      <div class="btn-row center">
+        <a class="btn btn-primary store-btn" data-store="ios" data-store-label="Download on the">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <span><small data-store-note>Coming soon to</small><b>App Store</b></span>
         </a>
-        <a href="#" class="store-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.66-2.76-10.8 9.76zM20.49 10.56L17.6 8.86l-3.01 2.93 3.01 3.11 2.91-1.69a1.9 1.9 0 0 0 0-3.31-.26-.15-.03-.34zM2.18.26a2.06 2.06 0 0 0-.18.85v21.78c0 .31.07.6.18.85l.09.08 12.2-12.2v-.29L2.27.18l-.09.08zM16.14 14.05L3.67 21.24l-.09.07.49.43 12.47-7.19-2.66-2.76 2.26 2.26z"/></svg>
-          Google Play
+        <a class="btn btn-ghost store-btn" data-store="android" data-store-label="Get it on">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8a1.9 1.9 0 0 0-.5 1.3v17.8c0 .5.2 1 .5 1.3l.1.1 10-10v-.2l-10-10-.1-.1zm13.4 6.6L5.3 1.7l-.2-.1 9 9 2.9-2.2zM5.1 22.4l.2-.1L17 15.6l-2.9-2.2-9 9zm14.9-9.2 2.4-1.4c.7-.4.7-1.1 0-1.5l-2.4-1.4-3.1 2.2 3.1 2.1z"/></svg>
+          <span><small data-store-note>Coming soon to</small><b>Google Play</b></span>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-label">Features</div>
-      <h2 class="section-title">Built for people who love flying, not filing paperwork</h2>
-      <p class="section-sub">ClimbLog helps you keep your entire flight history in one place, from your very first trip to the routes you are taking next month.</p>
+</main>
 
-      <div class="features-grid">
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3>Your Personal Flight Log</h3>
-          <p>Save every flight with airports, airline, aircraft, date, seat details, and notes. Your travel history stays organized and easy to revisit.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <h3>Route Map and Globe View</h3>
-          <p>See your routes come alive on a world map, then zoom out to a globe view that makes long-haul flights feel as dramatic as they should.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3>Stats, Milestones, and Trends</h3>
-          <p>Track flights, miles, countries, airports, aircraft, longest routes, best year, and more without doing any manual math.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </div>
-          <h3>Upcoming Flights</h3>
-          <p>Keep future trips separate from your history, so you can watch what is coming up next and open route details before you even take off.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>Flight Passport Sharing</h3>
-          <p>Create a polished share card from your travel data, complete with your route map, countries visited, and signature passport-inspired styling.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 1 21 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 4.93 4.93"/></svg>
-          </div>
-          <h3>Friends and Shared Routes</h3>
-          <p>Follow friends, compare where you have both flown, and browse upcoming trips in a feed that makes the social side of flying actually fun.</p>
-        </div>
-
-      </div>
-
-      <div class="story-panel">
-        <div>
-          <h3>ClimbLog turns flight history into something you will actually want to keep opening</h3>
-          <p>Most flight trackers stop at storing data. ClimbLog is designed to make that data feel alive, whether you care most about your map, your miles, your countries, your future trips, or the people you fly alongside.</p>
-          <ul class="story-list">
-            <li>Build a complete archive of every route you have flown</li>
-            <li>See your home airport, favorite airlines, and top countries at a glance</li>
-            <li>Compare overlap with friends and discover shared routes</li>
-            <li>Keep one clean home for both past flights and upcoming ones</li>
-          </ul>
-        </div>
-        <div class="story-metrics">
-          <div class="story-metric">
-            <strong>One timeline</strong>
-            <span>Past flights, future flights, and milestones all in one place</span>
-          </div>
-          <div class="story-metric">
-            <strong>One map</strong>
-            <span>Your routes, your home airport, and your world as it grows</span>
-          </div>
-          <div class="story-metric">
-            <strong>One identity</strong>
-            <span>A Flight Passport you can actually share with pride</span>
-          </div>
-        </div>
-      </div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <a href="/" class="nav-brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17.8 19.2 16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a.5.5 0 0 0-.5.8l3.2 4-2.2 2.2-2.1-.5a.5.5 0 0 0-.5.8L5 16l2.5 2.3a.5.5 0 0 0 .8-.5l-.5-2.1L10 13.5l4 3.2a.5.5 0 0 0 .8-.5z"/>
+        </svg>
+        ClimbLog
+      </a>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/support.html">Support</a>
+        <a href="/delete-account.html">Delete account</a>
+      </nav>
     </div>
-  </section>
-
-  <div class="stats-band">
-    <div class="stats-inner">
-      <div>
-        <div class="stat-num">Route Maps</div>
-        <div class="stat-label">See your travel life geographically</div>
-      </div>
-      <div>
-        <div class="stat-num">Flight Passport</div>
-        <div class="stat-label">Shareable travel identity cards</div>
-      </div>
-      <div>
-        <div class="stat-num">Friends Feed</div>
-        <div class="stat-label">See who is flying where next</div>
-      </div>
-      <div>
-        <div class="stat-num">iOS + Android</div>
-        <div class="stat-label">Take your history anywhere</div>
-      </div>
+    <div class="footer-legal">
+      &copy; <span data-year>2026</span> KeyQueue LLC. ClimbLog is a registered trademark of KeyQueue LLC.
     </div>
   </div>
+</footer>
 
-  <section class="cta-section">
-    <div class="section-inner">
-      <div class="section-label">Download Now</div>
-      <h2 class="section-title">Start building your flight history</h2>
-      <p>Whether you fly a few times a year or plan whole life eras around airports, ClimbLog gives your travel story a place to live.</p>
-      <div class="download-btns">
-        <a href="#" class="store-btn" style="background:var(--navy);border-color:var(--navy);color:#fff;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          Download on the App Store
-        </a>
-        <a href="#" class="store-btn" style="background:var(--sky);border-color:var(--sky);color:#fff;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.66-2.76-10.8 9.76zM20.49 10.56L17.6 8.86l-3.01 2.93 3.01 3.11 2.91-1.69a1.9 1.9 0 0 0 0-3.31-.26-.15-.03-.34zM2.18.26a2.06 2.06 0 0 0-.18.85v21.78c0 .31.07.6.18.85l.09.08 12.2-12.2v-.29L2.27.18l-.09.08zM16.14 14.05L3.67 21.24l-.09.07.49.43 12.47-7.19-2.66-2.76 2.26 2.26z"/></svg>
-          Get it on Google Play
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="support.html">Support</a>
-        <a href="delete-account.html">Delete Account</a>
-      </div>
-      <div>&copy; 2026 KeyQueue LLC &mdash; ClimbLog is a registered trademark of KeyQueue LLC.</div>
-    </div>
-  </footer>
-
+<script src="/assets/js/site.js"></script>
 </body>
 </html>

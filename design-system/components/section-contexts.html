@@ -1,0 +1,61 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClimbLog — Section contexts</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+background:#F5F5F7;color:#0A0A0F;padding:28px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.t{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4F8EF7;margin-bottom:6px}
+.h{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.n{font-size:13px;color:#555570;margin-bottom:26px;max-width:64ch}
+.g{margin-bottom:30px}.g:last-of-type{margin-bottom:0}
+.gl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:12px}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:14px}
+.s{border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(10,10,15,.10)}
+.c{height:82px}
+.m{padding:10px 12px 12px;background:#fff;border:1px solid #E0E0EA;border-top:none;border-radius:0 0 14px 14px}
+.nm{font-size:13px;font-weight:600;margin-bottom:2px}
+.hx{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:12px;opacity:.62;text-transform:uppercase}
+.v{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:11px;opacity:.45;display:block;margin-top:3px;word-break:break-all}
+.p{background:#fff;border:1px solid #E0E0EA;border-radius:16px;padding:22px}
+.src{margin-top:28px;font-size:12px;font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;opacity:.5}
+@media (prefers-color-scheme:dark){
+body{background:#242434;color:#F0F0FF}.n{color:#A0A0C0}
+.m,.p{background:#36364E;border-color:#565672}
+}
+.ctx{border-radius:16px;padding:22px;margin-bottom:14px}
+.ctx h4{font-size:16px;font-weight:700;margin-bottom:4px}
+.ctx p{font-size:13px}
+.tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:8px}</style>
+</head>
+<body>
+<div class="t">Components</div>
+<div class="h">Section contexts</div>
+<p class="n">The site alternates four palettes by section. Each <code>.ctx-*</code> class rebinds the semantic variables locally, so any card or button dropped inside inherits the right scheme with no per-element overrides.</p>
+
+<div class="ctx" style="background:#242434;color:#F0F0FF">
+  <div class="tag" style="color:#4F8EF7">.ctx-charcoal — nav, hero, footer</div>
+  <h4>Your travel life, mapped</h4>
+  <p style="color:#A0A0C0">App chrome. Identical in light and dark themes — it is the dark chrome.</p>
+</div>
+<div class="ctx" style="background:#F5F5F7;color:#0A0A0F;border:1px solid #E0E0EA">
+  <div class="tag" style="color:#2D6FDF">default light — feature sections</div>
+  <h4>Built for people who love flying</h4>
+  <p style="color:#555570">Follows the reader's theme; flips to charcoal in dark mode.</p>
+</div>
+<div class="ctx" style="background:linear-gradient(155deg,#110C52,#1C1472);color:#fff">
+  <div class="tag" style="color:#FFC840">.ctx-passport — Passport showcase</div>
+  <h4>A Flight Passport worth sharing</h4>
+  <p style="color:rgba(255,255,255,.66)">Indigo and gold. One band only, so it stays an event.</p>
+</div>
+<div class="ctx" style="background:#1B1B28;color:#F5F0E4">
+  <div class="tag" style="color:#C9A84C">.ctx-altitude — premium</div>
+  <h4>Altitude</h4>
+  <p style="color:rgba(245,240,228,.66)">Gold means premium. Never decorative.</p>
+</div>
+<div class="src">source: climblog-site/assets/css/tokens.css → .ctx-*</div>
+</body>
+</html>

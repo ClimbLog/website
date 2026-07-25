@@ -1,0 +1,64 @@
+<!-- @dsCard group="Type" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClimbLog — Typography</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+background:#F5F5F7;color:#0A0A0F;padding:28px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.t{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4F8EF7;margin-bottom:6px}
+.h{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.n{font-size:13px;color:#555570;margin-bottom:26px;max-width:64ch}
+.g{margin-bottom:30px}.g:last-of-type{margin-bottom:0}
+.gl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:12px}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:14px}
+.s{border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(10,10,15,.10)}
+.c{height:82px}
+.m{padding:10px 12px 12px;background:#fff;border:1px solid #E0E0EA;border-top:none;border-radius:0 0 14px 14px}
+.nm{font-size:13px;font-weight:600;margin-bottom:2px}
+.hx{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:12px;opacity:.62;text-transform:uppercase}
+.v{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:11px;opacity:.45;display:block;margin-top:3px;word-break:break-all}
+.p{background:#fff;border:1px solid #E0E0EA;border-radius:16px;padding:22px}
+.src{margin-top:28px;font-size:12px;font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;opacity:.5}
+@media (prefers-color-scheme:dark){
+body{background:#242434;color:#F0F0FF}.n{color:#A0A0C0}
+.m,.p{background:#36364E;border-color:#565672}
+}
+.ty{border-bottom:1px solid #E0E0EA;padding:14px 0;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.ty:last-child{border-bottom:none}
+.ty code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;opacity:.5;min-width:170px}
+@media (prefers-color-scheme:dark){.ty{border-color:#565672}}</style>
+</head>
+<body>
+<div class="t">Foundations</div>
+<div class="h">Typography</div>
+<p class="n">Inter across app and web. The px scale is the app's; the rem column is the web equivalent used by tokens.css.</p>
+<div class="p">
+<div class="ty">
+  <span style="font-size:42px;font-weight:800;letter-spacing:-.02em">Climb higher</span>
+  <code>4xl · 42px · 2.625rem</code></div><div class="ty">
+  <span style="font-size:34px;font-weight:800;letter-spacing:-.02em">Climb higher</span>
+  <code>3xl · 34px · 2.125rem</code></div><div class="ty">
+  <span style="font-size:28px;font-weight:700;letter-spacing:-.02em">Climb higher</span>
+  <code>2xl · 28px · 1.75rem</code></div><div class="ty">
+  <span style="font-size:24px;font-weight:700;letter-spacing:0">Climb higher</span>
+  <code>xl · 24px · 1.5rem</code></div><div class="ty">
+  <span style="font-size:20px;font-weight:600;letter-spacing:0">Climb higher</span>
+  <code>lg · 20px · 1.25rem</code></div><div class="ty">
+  <span style="font-size:17px;font-weight:400;letter-spacing:0">Climb higher</span>
+  <code>md · 17px · 1.0625rem</code></div><div class="ty">
+  <span style="font-size:15px;font-weight:400;letter-spacing:0">Climb higher</span>
+  <code>base · 15px · 0.9375rem</code></div><div class="ty">
+  <span style="font-size:13px;font-weight:400;letter-spacing:0">Climb higher</span>
+  <code>sm · 13px · 0.8125rem</code></div><div class="ty">
+  <span style="font-size:11px;font-weight:500;letter-spacing:0">Climb higher</span>
+  <code>xs · 11px · 0.6875rem</code></div>
+</div>
+<div class="g" style="margin-top:26px"><div class="gl">Weights</div><div class="p">
+<div class="ty"><span style="font-size:18px;font-weight:300">Light</span><code>300</code></div><div class="ty"><span style="font-size:18px;font-weight:400">Regular</span><code>400</code></div><div class="ty"><span style="font-size:18px;font-weight:500">Medium</span><code>500</code></div><div class="ty"><span style="font-size:18px;font-weight:600">SemiBold</span><code>600</code></div><div class="ty"><span style="font-size:18px;font-weight:700">Bold</span><code>700</code></div><div class="ty"><span style="font-size:18px;font-weight:800">ExtraBold (web headings)</span><code>800</code></div>
+</div></div>
+<div class="src">source: ClimbLog/src/constants/typography.ts</div>
+</body>
+</html>

@@ -4,201 +4,196 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
+
   <title>ClimbLog</title>
+  <meta name="description" content="ClimbLog - your travel life, mapped and remembered." />
+  <meta name="theme-color" content="#110C52" />
+
+  <!-- This page also serves every /u/{username} friend invite, so the social
+       card matters here: a shared climblog.co/u/name link unfurls with these. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ClimbLog" />
+  <meta property="og:title" content="Join me on ClimbLog" />
+  <meta property="og:description" content="ClimbLog is a personal flight log. Track every flight, build your route map, and share your Flight Passport." />
+  <meta property="og:image" content="https://climblog.co/assets/img/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Join me on ClimbLog" />
+  <meta name="twitter:description" content="ClimbLog is a personal flight log. Track every flight, build your route map, and share your Flight Passport." />
+  <meta name="twitter:image" content="https://climblog.co/assets/img/og.png" />
+
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/img/icon-180.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" />
+
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #1B3A6B;
-      --sky: #3A7FD5;
-      --sky-light: #EBF2FC;
-      --accent: #E8A020;
-      --bg: #F7F9FC;
-      --surface: #FFFFFF;
-      --text: #1E2D45;
-      --muted: #5A6A80;
-      --border: #D6E1EE;
-      --radius: 10px;
-    }
-
+    /* Passport indigo throughout - this is the share-link landing page. */
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-    }
-
-    nav {
-      background: var(--navy);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      height: 60px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
+      background: var(--cl-passport-gradient);
+      background-attachment: fixed;
       color: #fff;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+    }
+
+    .invite-nav {
+      padding: var(--cl-space-lg) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
     }
 
     main {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 1.5rem;
+      display: grid;
+      place-items: center;
+      padding: var(--cl-space-3xl) var(--cl-space-xl);
     }
 
     .invite-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 8px 32px rgba(27,58,107,0.08);
-      padding: 2.6rem 2rem 2.2rem;
-      max-width: 400px;
       width: 100%;
+      max-width: 420px;
       text-align: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--cl-radius-xl);
+      padding: var(--cl-space-3xl) var(--cl-space-xl);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.35);
     }
 
+    .invite-card.hidden { display: none; }
+
     .invite-plane {
-      width: 56px;
-      height: 56px;
-      background: var(--sky-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.4rem;
-      color: var(--sky);
+      width: 58px; height: 58px;
+      margin: 0 auto var(--cl-space-lg);
+      display: grid; place-items: center;
+      border-radius: var(--cl-radius-full);
+      background: rgba(255,200,64,0.12);
+      border: 1px solid rgba(255,200,64,0.42);
+      color: var(--cl-passport-gold);
     }
 
     .invite-username {
-      font-size: 1.9rem;
+      font-size: var(--cl-text-2xl);
       font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--navy);
+      letter-spacing: var(--cl-tracking-tight);
+      margin-bottom: var(--cl-space-xs);
       word-break: break-all;
     }
 
     .invite-line {
-      color: var(--muted);
-      margin: 0.35rem 0 1.8rem;
+      color: rgba(255,255,255,0.66);
+      margin-bottom: var(--cl-space-2xl);
     }
 
-    .store-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      text-decoration: none;
-      border-radius: var(--radius);
-      padding: 12px 22px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      margin: 0 auto 0.7rem;
-      max-width: 280px;
-      transition: opacity 0.2s;
+    .invite-card .btn {
+      width: 100%;
+      margin-bottom: var(--cl-space-md);
     }
 
-    .store-btn:hover { opacity: 0.9; }
-    .store-btn.primary { background: var(--navy); color: #fff; }
-    .store-btn.secondary { background: var(--sky); color: #fff; }
-    .store-btn svg { flex-shrink: 0; }
+    .invite-card .btn-primary {
+      background: var(--cl-passport-gold);
+      border-color: var(--cl-passport-gold);
+      color: #0F0F2D;
+    }
+    .invite-card .btn-primary:hover {
+      background: var(--cl-passport-route);
+      border-color: var(--cl-passport-route);
+      color: #0F0F2D;
+    }
+
+    .invite-card .btn-ghost {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.26);
+      color: #fff;
+    }
+    .invite-card .btn-ghost:hover { background: rgba(255,255,255,0.16); color: #fff; }
 
     .invite-after {
-      margin-top: 1.4rem;
-      background: var(--sky-light);
-      color: var(--sky);
-      border-radius: var(--radius);
-      padding: 0.7rem 0.9rem;
-      font-size: 0.9rem;
-      font-weight: 600;
+      margin-top: var(--cl-space-lg);
+      font-size: var(--cl-text-sm);
+      color: rgba(255,255,255,0.5);
     }
+    .invite-after b { color: rgba(255,255,255,0.78); }
 
-    .invite-after b { word-break: break-all; }
-
-    /* Plain 404 (non-/u/ paths) */
     .notfound-title {
-      font-size: 1.9rem;
+      font-size: var(--cl-text-2xl);
       font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 0.4rem;
+      letter-spacing: var(--cl-tracking-tight);
+      margin-bottom: var(--cl-space-sm);
     }
+    .notfound-line { color: rgba(255,255,255,0.66); margin-bottom: var(--cl-space-2xl); }
 
-    .notfound-line { color: var(--muted); margin-bottom: 1.8rem; }
-
-    .hidden { display: none; }
-
-    footer {
-      background: var(--navy);
-      color: rgba(255,255,255,0.55);
-      padding: 1.6rem 2rem;
+    .invite-footer {
+      padding: var(--cl-space-xl) 0;
       text-align: center;
-      font-size: 0.82rem;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      font-size: var(--cl-text-sm);
     }
-
-    footer a {
-      color: rgba(255,255,255,0.7);
+    .invite-footer a {
+      color: rgba(255,255,255,0.62);
       text-decoration: none;
-      margin: 0 0.6rem;
+      margin: 0 var(--cl-space-md);
     }
-
-    footer a:hover { color: #fff; }
+    .invite-footer a:hover { color: #fff; }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="/" class="nav-brand">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-      </svg>
-      ClimbLog
-    </a>
+  <nav class="invite-nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17.8 19.2 16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a.5.5 0 0 0-.5.8l3.2 4-2.2 2.2-2.1-.5a.5.5 0 0 0-.5.8L5 16l2.5 2.3a.5.5 0 0 0 .8-.5l-.5-2.1L10 13.5l4 3.2a.5.5 0 0 0 .8-.5z"/>
+        </svg>
+        ClimbLog
+      </a>
+    </div>
   </nav>
 
   <main>
     <!-- Friend invite (rendered for /u/{username} paths) -->
     <div class="invite-card hidden" id="invite">
       <div class="invite-plane">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
       </div>
       <div class="invite-username" id="invite-username">@username</div>
       <div class="invite-line">wants to be friends on ClimbLog</div>
-      <a href="#" class="store-btn primary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on the App Store
+
+      <a class="btn btn-primary store-btn" data-store="ios" data-store-label="Download on the">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span><small data-store-note>Coming soon to</small><b>App Store</b></span>
       </a>
-      <a href="#" class="store-btn secondary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.19l12.47-7.19-2.66-2.76-10.8 9.76zM20.49 10.56L17.6 8.86l-3.01 2.93 3.01 3.11 2.91-1.69a1.9 1.9 0 0 0 0-3.31-.26-.15-.03-.34zM2.18.26a2.06 2.06 0 0 0-.18.85v21.78c0 .31.07.6.18.85l.09.08 12.2-12.2v-.29L2.27.18l-.09.08zM16.14 14.05L3.67 21.24l-.09.07.49.43 12.47-7.19-2.66-2.76 2.26 2.26z"/></svg>
-        Get it on Google Play
+
+      <a class="btn btn-ghost store-btn" data-store="android" data-store-label="Get it on">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8a1.9 1.9 0 0 0-.5 1.3v17.8c0 .5.2 1 .5 1.3l.1.1 10-10v-.2l-10-10-.1-.1zm13.4 6.6L5.3 1.7l-.2-.1 9 9 2.9-2.2zM5.1 22.4l.2-.1L17 15.6l-2.9-2.2-9 9zm14.9-9.2 2.4-1.4c.7-.4.7-1.1 0-1.5l-2.4-1.4-3.1 2.2 3.1 2.1z"/></svg>
+        <span><small data-store-note>Coming soon to</small><b>Google Play</b></span>
       </a>
+
       <div class="invite-after">After installing, add <b id="invite-after-username">@username</b> from the Friends tab</div>
     </div>
 
     <!-- Plain 404 for anything else -->
     <div class="invite-card hidden" id="notfound">
       <div class="notfound-title">Page not found</div>
-      <div class="notfound-line">The page you're looking for doesn't exist.</div>
-      <a href="/" class="store-btn primary">Back to ClimbLog</a>
+      <div class="notfound-line">The page you are looking for does not exist.</div>
+      <a href="/" class="btn btn-primary">Back to ClimbLog</a>
     </div>
   </main>
 
-  <footer>
-    <a href="/">Home</a>
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/support.html">Support</a>
+  <footer class="invite-footer">
+    <div class="container">
+      <a href="/">Home</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/support.html">Support</a>
+    </div>
   </footer>
 
   <script>
@@ -220,5 +215,6 @@
     })();
   </script>
 
+  <script src="/assets/js/site.js"></script>
 </body>
 </html>

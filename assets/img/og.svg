@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#110C52"/>
+      <stop offset="55%" stop-color="#1C1472"/>
+      <stop offset="100%" stop-color="#0E0840"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.22" r="0.62">
+      <stop offset="0%" stop-color="#4F8EF7" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#4F8EF7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- meridians -->
+  <g stroke="#FFFFFF" stroke-opacity="0.07" fill="none">
+    <circle cx="1010" cy="300" r="300"/>
+    <circle cx="1010" cy="300" r="228"/>
+    <circle cx="1010" cy="300" r="152"/>
+    <ellipse cx="1010" cy="300" rx="120" ry="300"/>
+    <ellipse cx="1010" cy="300" rx="228" ry="300"/>
+    <line x1="710" y1="300" x2="1310" y2="300"/>
+  </g>
+
+  <!-- route arcs -->
+  <g fill="none" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round">
+    <path d="M800 470 Q 1010 200 1188 322" stroke-opacity="0.9"/>
+    <path d="M812 344 Q 990 176 1150 214" stroke-opacity="0.55"/>
+    <path d="M842 546 Q 1030 452 1176 486" stroke-opacity="0.4"/>
+  </g>
+  <g fill="#FFD700">
+    <circle cx="800" cy="470" r="7"/><circle cx="1188" cy="322" r="7"/>
+    <circle cx="812" cy="344" r="5" fill-opacity="0.7"/><circle cx="1150" cy="214" r="5" fill-opacity="0.7"/>
+  </g>
+
+  <!-- brand mark -->
+  <g transform="translate(90,88)">
+    <rect width="52" height="52" rx="13" fill="#4F8EF7"/>
+    <path d="M14 33 L38 19 M14 33 L21 33 L26 27 M38 19 L30 19 L26 27"
+          stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="70" y="36" fill="#FFFFFF" font-size="27" font-weight="700" letter-spacing="-0.4">ClimbLog</text>
+  </g>
+
+  <!-- headline -->
+  <text x="90" y="262" fill="#FFFFFF" font-size="60" font-weight="800" letter-spacing="-1.8">Your travel life,</text>
+  <text x="90" y="332" fill="#FFC840" font-size="60" font-weight="800" letter-spacing="-1.8">mapped and remembered.</text>
+
+  <text x="90" y="400" fill="#FFFFFF" fill-opacity="0.68" font-size="24" font-weight="400">
+    Log every flight. Build your route map. Share your Flight Passport.
+  </text>
+
+  <!-- footer chips -->
+  <g font-size="19" font-weight="600" letter-spacing="1.6">
+    <rect x="90" y="450" width="176" height="46" rx="23" fill="#FFFFFF" fill-opacity="0.10" stroke="#FFFFFF" stroke-opacity="0.20"/>
+    <text x="178" y="479" fill="#FFFFFF" fill-opacity="0.85" text-anchor="middle">ROUTE MAPS</text>
+
+    <rect x="282" y="450" width="216" height="46" rx="23" fill="#FFFFFF" fill-opacity="0.10" stroke="#FFFFFF" stroke-opacity="0.20"/>
+    <text x="390" y="479" fill="#FFFFFF" fill-opacity="0.85" text-anchor="middle">FLIGHT PASSPORT</text>
+
+    <rect x="514" y="450" width="172" height="46" rx="23" fill="#FFFFFF" fill-opacity="0.10" stroke="#FFFFFF" stroke-opacity="0.20"/>
+    <text x="600" y="479" fill="#FFFFFF" fill-opacity="0.85" text-anchor="middle">iOS + ANDROID</text>
+  </g>
+
+  <text x="90" y="576" fill="#FFFFFF" fill-opacity="0.34" font-size="18" letter-spacing="2.4">CLIMBLOG.CO</text>
+</svg>

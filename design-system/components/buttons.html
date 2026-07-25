@@ -1,0 +1,63 @@
+<!-- @dsCard group="Components" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClimbLog — Buttons</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+background:#F5F5F7;color:#0A0A0F;padding:28px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.t{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4F8EF7;margin-bottom:6px}
+.h{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.n{font-size:13px;color:#555570;margin-bottom:26px;max-width:64ch}
+.g{margin-bottom:30px}.g:last-of-type{margin-bottom:0}
+.gl{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:12px}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:14px}
+.s{border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(10,10,15,.10)}
+.c{height:82px}
+.m{padding:10px 12px 12px;background:#fff;border:1px solid #E0E0EA;border-top:none;border-radius:0 0 14px 14px}
+.nm{font-size:13px;font-weight:600;margin-bottom:2px}
+.hx{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:12px;opacity:.62;text-transform:uppercase}
+.v{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;font-size:11px;opacity:.45;display:block;margin-top:3px;word-break:break-all}
+.p{background:#fff;border:1px solid #E0E0EA;border-radius:16px;padding:22px}
+.src{margin-top:28px;font-size:12px;font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,monospace;opacity:.5}
+@media (prefers-color-scheme:dark){
+body{background:#242434;color:#F0F0FF}.n{color:#A0A0C0}
+.m,.p{background:#36364E;border-color:#565672}
+}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.8rem 1.4rem;
+border-radius:10px;border:1.5px solid transparent;font-family:inherit;font-size:15px;font-weight:600;
+text-decoration:none;cursor:pointer}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}</style>
+</head>
+<body>
+<div class="t">Components</div>
+<div class="h">Buttons</div>
+<p class="n">Primary uses the section's accent, so the same markup adapts per context — blue on charcoal, gold on Passport indigo, gold on Altitude. Ghost is the paired secondary.</p>
+<div class="g"><div class="gl">Charcoal context — accent #4F8EF7</div>
+<div class="p" style="background:#242434;border-color:rgba(255,255,255,.12)"><div class="row">
+<a class="btn" style="background:#4F8EF7;border-color:#4F8EF7;color:#fff">Get ClimbLog</a>
+<a class="btn" style="background:rgba(240,240,255,.08);border-color:rgba(240,240,255,.24);color:#F0F0FF">See features</a>
+</div></div></div>
+
+<div class="g"><div class="gl">Passport context — accent #FFC840</div>
+<div class="p" style="background:linear-gradient(155deg,#110C52,#1C1472);border-color:rgba(255,255,255,.16)"><div class="row">
+<a class="btn" style="background:#FFC840;border-color:#FFC840;color:#0F0F2D">Make your Passport</a>
+<a class="btn" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.24);color:#fff">Learn more</a>
+</div></div></div>
+
+<div class="g"><div class="gl">Altitude context — accent #C9A84C</div>
+<div class="p" style="background:#1B1B28;border-color:rgba(201,168,76,.28)"><div class="row">
+<a class="btn" style="background:#C9A84C;border-color:#C9A84C;color:#1B1B28">Go Altitude</a>
+<a class="btn" style="background:rgba(245,240,228,.08);border-color:rgba(201,168,76,.42);color:#F5F0E4">Compare plans</a>
+</div></div></div>
+
+<div class="g"><div class="gl">Light context — accent #2D6FDF</div>
+<div class="p"><div class="row">
+<a class="btn" style="background:#2D6FDF;border-color:#2D6FDF;color:#fff">Download</a>
+<a class="btn" style="background:rgba(10,10,15,.05);border-color:rgba(10,10,15,.16);color:#0A0A0F">Support</a>
+</div></div></div>
+<div class="src">source: climblog-site/assets/css/site.css → .btn</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+/* ==========================================================================
+   ClimbLog Design Tokens
+   --------------------------------------------------------------------------
+   SOURCE OF TRUTH: the ClimbLog app repo. Do not invent values here.
+     Brand / Altitude / charcoal ... ClimbLog/src/constants/colors.ts
+     Passport indigo + light       ... ClimbLog/src/components/passport/
+                                       PassportShareCard.tsx  (DARK_T / LIGHT_T)
+     Type / spacing / radii        ... ClimbLog/src/constants/typography.ts
+                                       ClimbLog/src/constants/spacing.ts
+   If a value changes in the app, change it here and re-push the Claude Design
+   project. Never hand-edit a hex in a page file.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand ------------------------------------------------------------ */
+  --cl-brand:            #4F8EF7;
+  --cl-brand-dark:       #2D6FDF;
+  --cl-brand-light:      #7EB3FF;
+
+  /* ---- Altitude (premium plan) ------------------------------------------ */
+  --cl-altitude:         #C9A84C;
+  --cl-altitude-dark:    #A8863A;
+  --cl-altitude-light:   #E8C97A;
+
+  /* ---- Passport: indigo scheme (dark card) ------------------------------ */
+  --cl-passport-1:       #110C52;  /* gradient stop 1 */
+  --cl-passport-2:       #1C1472;  /* gradient stop 2 */
+  --cl-passport-3:       #0E0840;  /* gradient stop 3 */
+  --cl-passport-gold:    #FFC840;  /* MRZ text, brand mark */
+  --cl-passport-route:   #FFD700;  /* route lines + dots */
+  --cl-passport-land:    rgba(95,75,215,0.82);
+  --cl-passport-gradient:
+    linear-gradient(155deg, #110C52 0%, #1C1472 55%, #0E0840 100%);
+
+  /* ---- Passport: light scheme ------------------------------------------- */
+  --cl-passport-l-1:     #F7F1FF;
+  --cl-passport-l-2:     #EAE3FF;
+  --cl-passport-l-3:     #E2EEFF;
+  --cl-passport-l-ink:   #1B144E;
+  --cl-passport-l-route: #E24B5B;  /* coral */
+  --cl-passport-l-land:  rgba(75,49,198,0.96);
+  --cl-passport-l-gradient:
+    linear-gradient(155deg, #F7F1FF 0%, #EAE3FF 55%, #E2EEFF 100%);
+
+  /* ---- Status ----------------------------------------------------------- */
+  --cl-success:          #34C759;
+  --cl-warning:          #FF9F0A;
+  --cl-error:            #FF453A;
+
+  /* ---- Type ------------------------------------------------------------- */
+  --cl-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+             Arial, sans-serif;
+  --cl-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  /* App scale is px-based; the web scale below is the rem equivalent. */
+  --cl-text-xs:   0.6875rem;  /* 11 */
+  --cl-text-sm:   0.8125rem;  /* 13 */
+  --cl-text-base: 0.9375rem;  /* 15 */
+  --cl-text-md:   1.0625rem;  /* 17 */
+  --cl-text-lg:   1.25rem;    /* 20 */
+  --cl-text-xl:   1.5rem;     /* 24 */
+  --cl-text-2xl:  1.75rem;    /* 28 */
+  --cl-text-3xl:  2.125rem;   /* 34 */
+  --cl-text-4xl:  2.625rem;   /* 42 */
+
+  --cl-leading-tight:   1.2;
+  --cl-leading-normal:  1.5;
+  --cl-leading-relaxed: 1.7;
+
+  --cl-tracking-tight:  -0.02em;
+  --cl-tracking-wide:   0.04em;
+  --cl-tracking-widest: 0.14em;
+
+  --cl-weight-light:     300;
+  --cl-weight-regular:   400;
+  --cl-weight-medium:    500;
+  --cl-weight-semibold:  600;
+  --cl-weight-bold:      700;
+
+  /* ---- Spacing (app Spacing scale) -------------------------------------- */
+  --cl-space-xs:  0.25rem;   /* 4  */
+  --cl-space-sm:  0.5rem;    /* 8  */
+  --cl-space-md:  0.75rem;   /* 12 */
+  --cl-space:     1rem;      /* 16 */
+  --cl-space-lg:  1.25rem;   /* 20 */
+  --cl-space-xl:  1.5rem;    /* 24 */
+  --cl-space-2xl: 2rem;      /* 32 */
+  --cl-space-3xl: 2.5rem;    /* 40 */
+  --cl-space-4xl: 3rem;      /* 48 */
+  --cl-space-5xl: 4rem;      /* 64 */
+
+  /* ---- Radii (app BorderRadius scale) ----------------------------------- */
+  --cl-radius-sm:   6px;
+  --cl-radius-md:   10px;
+  --cl-radius-lg:   14px;
+  --cl-radius-xl:   20px;
+  --cl-radius-full: 9999px;
+
+  /* ---- Elevation -------------------------------------------------------- */
+  --cl-shadow-sm: 0 1px 2px rgba(10,10,15,0.06);
+  --cl-shadow-md: 0 4px 16px rgba(10,10,15,0.08);
+  --cl-shadow-lg: 0 12px 40px rgba(10,10,15,0.12);
+
+  /* ---- Layout ----------------------------------------------------------- */
+  --cl-container: 1100px;
+  --cl-container-narrow: 720px;
+  --cl-nav-height: 60px;
+
+  --cl-transition: 0.2s ease;
+}
+
+/* ==========================================================================
+   Semantic layer — light theme (app Colors.light)
+   Pages reference ONLY these. Swapping theme swaps this block, never a page.
+   ========================================================================== */
+
+:root,
+:root[data-theme='light'] {
+  --bg:                #F5F5F7;
+  --surface:           #FFFFFF;
+  --surface-elevated:  #F0F0F5;
+  --border:            #E0E0EA;
+  --border-subtle:     #EEEEF5;
+  --text:              #0A0A0F;
+  --text-secondary:    #555570;
+  --text-tertiary:     #9898B0;
+  --accent:            #2D6FDF;   /* light-mode accent per colors.ts */
+  --accent-hover:      #4F8EF7;
+  --on-accent:         #FFFFFF;
+  --success:           #28A745;
+  --warning:           #FF9F0A;
+  --error:             #DC3545;
+  --shadow:            var(--cl-shadow-md);
+}
+
+/* ==========================================================================
+   Semantic layer — dark theme (app Colors.dark, charcoal not black)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg:               #242434;
+    --surface:          #36364E;
+    --surface-elevated: #424260;
+    --border:           #565672;
+    --border-subtle:    #464660;
+    --text:             #F0F0FF;
+    --text-secondary:   #A0A0C0;
+    --text-tertiary:    #78789A;
+    --accent:           #4F8EF7;
+    --accent-hover:     #7EB3FF;
+    --on-accent:        #0A0A0F;
+    --success:          #34C759;
+    --warning:          #FF9F0A;
+    --error:            #FF453A;
+    --shadow:           0 12px 40px rgba(0,0,0,0.4);
+  }
+}
+
+/* Explicit toggle must beat the media query in both directions. */
+:root[data-theme='dark'] {
+  --bg:               #242434;
+  --surface:          #36364E;
+  --surface-elevated: #424260;
+  --border:           #565672;
+  --border-subtle:    #464660;
+  --text:             #F0F0FF;
+  --text-secondary:   #A0A0C0;
+  --text-tertiary:    #78789A;
+  --accent:           #4F8EF7;
+  --accent-hover:     #7EB3FF;
+  --on-accent:        #0A0A0F;
+  --success:          #34C759;
+  --warning:          #FF9F0A;
+  --error:            #FF453A;
+  --shadow:           0 12px 40px rgba(0,0,0,0.4);
+}
+
+/* ==========================================================================
+   Section context classes — the "sectioned" palette strategy.
+   Applied to a <section>, these locally rebind the semantic vars so any
+   component dropped inside inherits the right scheme automatically.
+   ========================================================================== */
+
+/* Charcoal: nav, hero, footer. Same in both themes (it IS the dark chrome). */
+.ctx-charcoal {
+  --bg:               #242434;
+  --surface:          #36364E;
+  --surface-elevated: #424260;
+  --border:           rgba(255,255,255,0.12);
+  --border-subtle:    rgba(255,255,255,0.07);
+  --text:             #F0F0FF;
+  --text-secondary:   #A0A0C0;
+  --text-tertiary:    #78789A;
+  --accent:           #4F8EF7;
+  --accent-hover:     #7EB3FF;
+  --on-accent:        #FFFFFF;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Passport indigo: the Passport showcase band. */
+.ctx-passport {
+  --bg:               #110C52;
+  --surface:          rgba(255,255,255,0.07);
+  --surface-elevated: rgba(255,255,255,0.12);
+  --border:           rgba(255,255,255,0.16);
+  --border-subtle:    rgba(255,255,255,0.09);
+  --text:             #FFFFFF;
+  --text-secondary:   rgba(255,255,255,0.66);
+  --text-tertiary:    rgba(255,255,255,0.44);
+  --accent:           var(--cl-passport-gold);
+  --accent-hover:     var(--cl-passport-route);
+  --on-accent:        #0F0F2D;
+  background: var(--cl-passport-gradient);
+  color: var(--text);
+}
+
+/* Altitude gold: premium / upgrade band, on charcoal. */
+.ctx-altitude {
+  --bg:               #1B1B28;
+  --surface:          rgba(201,168,76,0.07);
+  --surface-elevated: rgba(201,168,76,0.12);
+  --border:           rgba(201,168,76,0.28);
+  --border-subtle:    rgba(201,168,76,0.14);
+  --text:             #F5F0E4;
+  --text-secondary:   rgba(245,240,228,0.66);
+  --text-tertiary:    rgba(245,240,228,0.42);
+  --accent:           var(--cl-altitude);
+  --accent-hover:     var(--cl-altitude-light);
+  --on-accent:        #1B1B28;
+  background: var(--bg);
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --cl-transition: 0s; }
+}
