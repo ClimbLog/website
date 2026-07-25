@@ -47,6 +47,35 @@ Nothing in flight. Next actions are in the backlog below, **P0 first**.
 
 ## Session log
 
+### 2026-07-25 (b) — Real icons, Friends band, copy aligned to the app
+
+- **Brand mark is now the actual app icon.** Replaced the placeholder plane
+  glyph (originally a *telephone handset*, then a generic plane) with the real
+  mark from `ClimbLog/assets/app_icon/app_icon_main.svg` — the climbing/takeoff
+  plane with its runway line. Applied to nav, footer, Passport seal, and the
+  aircraft marker on the hero route. Uses `fill="currentColor"` so it inherits
+  the section accent.
+- **Google Play logo is the official geometry** (four-color, from simple-icons)
+  rather than a hand-drawn approximation. Apple mark was already the standard one.
+- **Delete-account link removed from the footer** on all pages. It lived in the
+  footer nav row. It is *still* reachable from the top nav ("Account") and the
+  support page — deliberately, since Apple and Google both require a
+  discoverable account-deletion path for apps with account creation. Do not
+  remove those two as well without checking store review requirements.
+- **New Friends band** (`#friends`, charcoal) between Features and Passport,
+  with a CSS friends-feed mockup: avatars (Altitude members carry the gold ring,
+  same as in-app), route rows, status chips, and the `climblog.co/u/yourname`
+  share link. Added to the nav. This is the competitive-differentiation section —
+  Flighty and byAir are both single-user trackers.
+- **Copy aligned to the app.** Dropped "not filing paperwork" and the
+  spreadsheet framing. Hero lede and section headings now lead with the social
+  angle; feature cards describe what the app actually does (flight-number search
+  autofill, map styles, separate upcoming list, Passport light/dark). Meta and
+  OG descriptions updated to match.
+- `.alt-list svg` now uses `var(--accent)` instead of hard-coded gold, so the
+  checkmarks are blue in the Friends band and gold in the Altitude band.
+
+
 ### 2026-07-25 — Full redesign: tokens, design system, six-page rebuild
 
 **Problem.** The site was visually unrelated to the app. It used a navy/sky/orange
