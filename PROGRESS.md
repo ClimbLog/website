@@ -6,8 +6,14 @@ Work log for `climblog-site`. Stable project knowledge lives in `CLAUDE.md`.
 
 ## Current WIP / PICK UP HERE
 
-Full redesign landed 2026-07-25 (uncommitted — review `git diff` before committing).
-Nothing in flight. Next actions are in the backlog below, **P0 first**.
+Full redesign shipped and live at https://climblog.co as of 2026-07-25.
+Commits `e1d96a3` (redesign) and `bb827cf` (real icons, Friends band, copy) are
+pushed to `main`; working tree clean. Nothing in flight.
+
+Next actions are in the backlog below, **P0 first** — both P0 items are launch
+blockers that are currently invisible to visitors, so they are easy to forget:
+the store buttons render "Coming soon" chips, and the support form silently
+discards every message.
 
 ---
 
