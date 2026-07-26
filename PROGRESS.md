@@ -87,8 +87,8 @@ The footer "Beta" link and the two homepage mentions were kept - if the beta
 needs to be fully private, those three are the remaining on-site entry points.
 Remove the noindex at GA.
 
-**Copy + type pass (same day, post-review).** Masthead lockup enlarged in two
-rounds, ending at 24px text (`--cl-text-xl`) and a 30px mark. The size lives on
+**Copy + type pass (same day, post-review).** Masthead lockup enlarged over three
+rounds, ending at 28px text (`--cl-text-2xl`) and a 36px mark. The size lives on
 `.site-nav .nav-brand` rather than `.nav-brand`, so the footer lockup keeps the
 smaller 20px/22px pairing. The svg rule overrides the width/height attributes in
 the markup, which avoids editing the same lockup across seven files. Dropped the trailing periods from the two hero
