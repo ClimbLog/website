@@ -12,6 +12,17 @@ const STORE_LINKS = {
   android: '',  // e.g. 'https://play.google.com/store/apps/details?id=com.climblog.app'
 };
 
+/* ---- Beta links ---------------------------------------------------------
+   Same idea as STORE_LINKS, but for the pre-release builds on /beta.html:
+   TestFlight for iOS, Firebase App Distribution for Android. Paste the invite
+   URLs here and the buttons go live. Leave a value empty ('') and that
+   platform renders as "Invites opening soon" instead of a dead link.
+   ------------------------------------------------------------------------ */
+const BETA_LINKS = {
+  ios: 'https://testflight.apple.com/join/8RqTZfRQ',
+  android: 'https://appdistribution.firebase.dev/i/d98e7ae5c6ffa25b',
+};
+
 (function applyStoreLinks() {
   document.querySelectorAll('[data-store]').forEach(el => {
     const url = STORE_LINKS[el.dataset.store];
@@ -26,6 +37,26 @@ const STORE_LINKS = {
       el.setAttribute('aria-disabled', 'true');
       el.classList.add('is-pending');
       if (note) note.textContent = 'Coming soon to';
+    }
+  });
+})();
+
+(function applyBetaLinks() {
+  document.querySelectorAll('[data-beta]').forEach(el => {
+    const url = BETA_LINKS[el.dataset.beta];
+    const note = el.querySelector('[data-beta-note]');
+    if (url) {
+      el.setAttribute('href', url);
+      el.setAttribute('target', '_blank');
+      el.setAttribute('rel', 'noopener');
+      el.removeAttribute('aria-disabled');
+      el.classList.remove('is-pending');
+      if (note) note.textContent = el.dataset.betaLabel || 'Join the beta on';
+    } else {
+      el.removeAttribute('href');
+      el.setAttribute('aria-disabled', 'true');
+      el.classList.add('is-pending');
+      if (note) note.textContent = 'Invites opening soon';
     }
   });
 })();

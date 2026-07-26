@@ -7,8 +7,12 @@ Work log for `climblog-site`. Stable project knowledge lives in `CLAUDE.md`.
 ## Current WIP / PICK UP HERE
 
 Full redesign shipped and live at https://climblog.co as of 2026-07-25.
-Commits `e1d96a3` (redesign) and `bb827cf` (real icons, Friends band, copy) are
-pushed to `main`; working tree clean. Nothing in flight.
+
+**2026-07-26:** mobile nav fix + new `beta.html`, with both live
+invite URLs already in `BETA_LINKS`. Verified rendering as real links, not the
+pending chip. Page is `noindex, nofollow` and is not in the nav, so it does not
+turn up in search - it is reached by URL, by the footer link, or from the two
+homepage mentions.
 
 Next actions are in the backlog below, **P0 first** — both P0 items are launch
 blockers that are currently invisible to visitors, so they are easy to forget:
@@ -39,7 +43,8 @@ discards every message.
       Slack/iMessage/X once deployed).
 
 ### P2 — nice to have
-- [ ] Nav/footer markup is duplicated across six files. If it starts drifting,
+- [ ] Nav/footer markup is duplicated across six files (seven with
+      `beta.html`; `404.html` has no nav). If it starts drifting,
       revisit the build-step decision (Astro/11ty was considered and declined
       on 2026-07-25 to keep GitHub Pages deploys zero-risk).
 - [ ] No sitemap.xml or robots.txt.
@@ -47,11 +52,43 @@ discards every message.
       rule was applied to marketing copy only — legal text was deliberately not
       reworded. Decide whether to normalize.
 - [ ] Mobile nav is a wrapping list, not a hamburger. Fine at current link
-      count; revisit if nav grows.
+      count, but the beta CTA pushed it to three rows on a 390px screen —
+      a hamburger is the next move if another link is added.
 
 ---
 
 ## Session log
+
+### 2026-07-26 — Mobile nav fix + beta page
+
+**Mobile nav.** The theme toggle was the last `<li>` inside `.nav-links`, so on
+a phone it wrapped onto a row of its own and sat alone under the links on the
+left. It is now a sibling of the `<ul>`: `.nav-links { margin-left: auto }`
+keeps desktop identical (brand left, links + toggle right), and a new
+`max-width: 640px` block uses flex `order` to put the toggle on the top row at
+the far right beside the brand, with the links wrapping full-width below.
+Applied to all five pages that have a nav; `404.html` has none.
+
+**`beta.html`** — new page, linked from the nav as a "Join the beta" pill
+(`.nav-cta`), from the footer of every page, from the hero note, and from the
+final CTA. Two platform buttons (TestFlight, Firebase App Distribution), per
+platform install steps, a bug-report pointer at `/support.html`, and a note
+covering terms/privacy plus how to leave the beta. Links run through
+`BETA_LINKS` + `data-beta` in `site.js`, the same pattern as `STORE_LINKS`, so
+the URLs live in exactly one place and render a disabled "Invites opening soon"
+state while empty. Both live URLs were supplied and are in place: TestFlight
+`join/8RqTZfRQ` and App Distribution `i/d98e7ae5c6ffa25b`. Buttons are labelled
+"iPhone beta" / "Android beta" rather than by the distribution tool, at the
+owner's request.
+
+**Unlisted on purpose.** Both invite URLs admit anyone holding them, so the page
+carries `noindex, nofollow` and the nav pill was pulled back out after review.
+The footer "Beta" link and the two homepage mentions were kept - if the beta
+needs to be fully private, those three are the remaining on-site entry points.
+Remove the noindex at GA.
+
+**Verified** at 390px and desktop width, light and dark, no console errors, no
+horizontal overflow, theme toggle still switches and persists.
 
 ### 2026-07-25 (b) — Real icons, Friends band, copy aligned to the app
 

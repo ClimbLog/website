@@ -4,16 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Delete Your Account — ClimbLog</title>
-  <meta name="description" content="How to permanently delete your ClimbLog account and all associated data from within the app." />
-  <link rel="canonical" href="https://climblog.co/delete-account.html" />
+  <title>Join the beta — ClimbLog</title>
+  <meta name="description" content="Try ClimbLog before it lands in the stores. Join the iOS TestFlight build or the Android build on Firebase App Distribution." />
+  <link rel="canonical" href="https://climblog.co/beta.html" />
   <meta name="theme-color" content="#242434" />
+
+  <!-- The beta invites are open links: a public TestFlight join URL and an App
+       Distribution URL that admits anyone who has it. Keeping this page out of
+       search results is what stops that from turning into unbounded signups.
+       The page stays reachable and shareable by URL. Remove at GA. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="googlebot" content="noindex, nofollow" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ClimbLog" />
-  <meta property="og:url" content="https://climblog.co/delete-account.html" />
-  <meta property="og:title" content="Delete Your Account — ClimbLog" />
-  <meta property="og:description" content="How to permanently delete your ClimbLog account." />
+  <meta property="og:url" content="https://climblog.co/beta.html" />
+  <meta property="og:title" content="Join the ClimbLog beta" />
+  <meta property="og:description" content="Try ClimbLog before it lands in the stores, on iOS or Android." />
   <meta property="og:image" content="https://climblog.co/assets/img/og.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -39,38 +46,20 @@
   <style>
     body { display: flex; flex-direction: column; min-height: 100vh; }
     main { flex: 1; }
-
-    .delete-card { max-width: 640px; margin-inline: auto; }
-
-    .notice {
-      display: flex;
-      gap: var(--cl-space-md);
-      align-items: flex-start;
-      background: color-mix(in srgb, var(--error) 10%, transparent);
-      border: 1px solid color-mix(in srgb, var(--error) 32%, transparent);
-      border-radius: var(--cl-radius-md);
-      padding: var(--cl-space-lg);
-      margin-bottom: var(--cl-space-2xl);
+    .beta-lede { color: var(--text-secondary); max-width: 62ch; margin-bottom: var(--cl-space-2xl); }
+    .beta-steps { counter-reset: step; list-style: none; display: grid; gap: var(--cl-space); }
+    .beta-steps li {
+      position: relative;
+      padding-left: 2.6rem;
+      color: var(--text-secondary);
+      font-size: var(--cl-text-base);
     }
-    .notice svg { color: var(--error); flex-shrink: 0; margin-top: 2px; }
-    .notice p { font-size: var(--cl-text-base); color: var(--text-secondary); margin: 0; }
-
-    .steps-label {
-      font-size: var(--cl-text-xs);
-      font-weight: var(--cl-weight-bold);
-      letter-spacing: var(--cl-tracking-widest);
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: var(--cl-space-lg);
-    }
-
-    .steps { list-style: none; display: grid; gap: var(--cl-space-lg); padding: 0; margin: 0 0 var(--cl-space-2xl); }
-
-    .step { display: flex; gap: var(--cl-space); align-items: flex-start; }
-
-    .step-num {
-      flex-shrink: 0;
-      width: 30px; height: 30px;
+    .beta-steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0; top: -0.1rem;
+      width: 1.75rem; height: 1.75rem;
       display: grid; place-items: center;
       border-radius: var(--cl-radius-full);
       background: color-mix(in srgb, var(--accent) 16%, transparent);
@@ -78,19 +67,7 @@
       font-size: var(--cl-text-sm);
       font-weight: var(--cl-weight-bold);
     }
-
-    .step-text strong { display: block; color: var(--text); font-weight: var(--cl-weight-semibold); margin-bottom: 2px; }
-    .step-text span { font-size: var(--cl-text-base); color: var(--text-secondary); }
-
-    .help-block {
-      display: flex;
-      gap: var(--cl-space-md);
-      align-items: flex-start;
-      border-top: 1px solid var(--border);
-      padding-top: var(--cl-space-xl);
-    }
-    .help-block svg { color: var(--text-tertiary); flex-shrink: 0; margin-top: 2px; }
-    .help-block p { font-size: var(--cl-text-base); color: var(--text-secondary); margin: 0; }
+    .beta-note { margin-top: var(--cl-space-2xl); color: var(--text-secondary); font-size: var(--cl-text-sm); }
   </style>
 </head>
 <body>
@@ -112,7 +89,6 @@
       <li><a href="/privacy.html">Privacy</a></li>
       <li><a href="/terms.html">Terms</a></li>
       <li><a href="/support.html">Support</a></li>
-      <li><a href="/delete-account.html" aria-current="page">Account</a></li>
     </ul>
     <button class="theme-toggle" type="button" aria-label="Toggle theme">
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -123,67 +99,56 @@
 
 <header class="page-header">
   <div class="container">
-    <p class="eyebrow" style="color: var(--cl-brand)">Account</p>
-    <h1>Delete your account</h1>
-    <p>Account deletion is handled directly in the ClimbLog app.</p>
+    <p class="eyebrow" style="color: var(--cl-brand)">Beta</p>
+    <h1>Fly with the beta.</h1>
+    <p>ClimbLog is in testing on both platforms. Grab a build, log a few flights, and tell us what breaks.</p>
   </div>
 </header>
 
 <main id="main" class="page-body">
   <div class="container">
-    <div class="card delete-card">
 
-      <div class="notice">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-        </svg>
-        <p>Account deletion is permanent and cannot be undone. All of your flight logs, settings, and personal data will be removed from our systems.</p>
-      </div>
+    <p class="beta-lede">The beta is the full app: flight logging, the map, friends, and the Passport. It updates often, sometimes several times a week, and the occasional rough edge is the point. Everything you log carries over to the released version.</p>
 
-      <div class="steps-label">How to delete your account</div>
-
-      <ol class="steps">
-        <li class="step">
-          <div class="step-num">1</div>
-          <div class="step-text">
-            <strong>Open ClimbLog</strong>
-            <span>Launch the app on your iOS or Android device.</span>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-num">2</div>
-          <div class="step-text">
-            <strong>Go to Settings</strong>
-            <span>Tap the profile icon or navigate to the Settings menu.</span>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-num">3</div>
-          <div class="step-text">
-            <strong>Select "Account"</strong>
-            <span>Find the Account section within your settings.</span>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-num">4</div>
-          <div class="step-text">
-            <strong>Tap "Delete Account"</strong>
-            <span>Confirm your decision when prompted to permanently delete your account and all associated data.</span>
-          </div>
-        </li>
-      </ol>
-
-      <div class="help-block">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-          <line x1="12" y1="17" x2="12.01" y2="17"/>
-        </svg>
-        <p>Need help? If you are having trouble accessing your account or need assistance with the deletion process, review our <a href="/privacy.html">Privacy Policy</a> or <a href="/support.html">contact support</a>.</p>
-      </div>
-
+    <div class="btn-row">
+      <a class="btn btn-primary store-btn" data-beta="ios" data-beta-label="Join the">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span><small data-beta-note>Invites opening soon</small><b>iPhone beta</b></span>
+      </a>
+      <a class="btn btn-ghost store-btn" data-beta="android" data-beta-label="Join the">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.14-.52.38.38 0 0 0-.52.14l-1.86 3.22a11.4 11.4 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.52-.14.38.38 0 0 0-.14.52L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52M7 15.25a1.05 1.05 0 1 1 1.05-1.05A1.05 1.05 0 0 1 7 15.25m10 0a1.05 1.05 0 1 1 1.05-1.05A1.05 1.05 0 0 1 17 15.25"/></svg>
+        <span><small data-beta-note>Invites opening soon</small><b>Android beta</b></span>
+      </a>
     </div>
+
+    <div class="grid" style="margin-top: var(--cl-space-3xl)">
+      <div class="card">
+        <h3>On iPhone</h3>
+        <ol class="beta-steps">
+          <li>Install Apple's TestFlight app from the App Store.</li>
+          <li>Tap the iPhone beta button above on your iPhone and accept the invite.</li>
+          <li>Install ClimbLog from inside TestFlight. Updates arrive there too.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>On Android</h3>
+        <ol class="beta-steps">
+          <li>Tap the Android beta button above on your Android phone.</li>
+          <li>Sign in with the Google account you want the build tied to, then accept the invite.</li>
+          <li>Install the build. New versions show up as a notification.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>Found something?</h3>
+        <p>Bug reports are the whole reason the beta exists. Tell us what you did, what you expected, and what happened instead. A screenshot helps.</p>
+        <p style="margin-top: var(--cl-space)"><a href="/support.html">Send a report</a></p>
+      </div>
+    </div>
+
+    <p class="beta-note">Beta builds can be unstable and may change without notice. By joining you agree to the <a href="/terms.html">Terms of Use</a> and <a href="/privacy.html">Privacy Policy</a>. Leaving the beta is as simple as deleting the app, and you can ask us to remove your account at any time from the <a href="/delete-account.html">account deletion</a> page.</p>
+
   </div>
 </main>
 

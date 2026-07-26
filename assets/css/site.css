@@ -181,12 +181,17 @@ h3 { font-size: var(--cl-text-lg); }
 .site-nav .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--cl-space-xl);
+  gap: var(--cl-space-lg);
   min-height: var(--cl-nav-height);
   padding-block: var(--cl-space-sm);
   flex-wrap: wrap;
 }
+
+/* The links push themselves right, so brand | links | toggle reads as one
+   right-aligned group on desktop. On narrow screens the toggle jumps up to sit
+   beside the brand and the links take their own full-width row - see the
+   max-width: 640px block at the bottom of this file. */
+.site-nav .nav-links { margin-left: auto; }
 
 .nav-brand {
   display: inline-flex;
@@ -218,6 +223,22 @@ h3 { font-size: var(--cl-text-lg); }
 }
 .nav-links a:hover { color: #fff; }
 .nav-links a[aria-current='page'] { color: #fff; font-weight: var(--cl-weight-semibold); }
+
+/* Beta invite - the one nav item that should read as an action. */
+.nav-links a.nav-cta {
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--cl-radius-full);
+  border: 1px solid color-mix(in srgb, var(--cl-brand) 55%, transparent);
+  background: color-mix(in srgb, var(--cl-brand) 18%, transparent);
+  color: #fff;
+  font-weight: var(--cl-weight-semibold);
+  white-space: nowrap;
+  transition: background var(--cl-transition), border-color var(--cl-transition);
+}
+.nav-links a.nav-cta:hover {
+  background: color-mix(in srgb, var(--cl-brand) 32%, transparent);
+  border-color: var(--cl-brand);
+}
 
 /* ---- Footer -------------------------------------------------------------- */
 
@@ -299,6 +320,11 @@ h3 { font-size: var(--cl-text-lg); }
   opacity: 0.72;
 }
 .store-btn.is-pending:hover { transform: none; }
+
+/* Beta buttons reuse the store-badge shape, so they inherit .store-btn and
+   only need the pending state wired to their own class. */
+.btn.is-pending { cursor: default; opacity: 0.72; }
+.btn.is-pending:hover { transform: none; }
 
 /* ---- Reveal on scroll ---------------------------------------------------- */
 
@@ -486,4 +512,14 @@ select {
 @media (max-width: 900px) {
   .legal-layout { grid-template-columns: 1fr; gap: var(--cl-space-xl); }
   .toc { position: static; max-height: none; }
+}
+
+/* Phone nav: brand and the theme toggle share the top row, links wrap below.
+   Without this the toggle wraps onto a third row of its own, floating alone
+   under the links on the left. */
+@media (max-width: 640px) {
+  .site-nav .container { gap: var(--cl-space-sm) var(--cl-space-lg); }
+  .site-nav .nav-brand { order: 1; }
+  .site-nav .theme-toggle { order: 2; margin-left: auto; }
+  .site-nav .nav-links { order: 3; flex-basis: 100%; margin-left: 0; }
 }

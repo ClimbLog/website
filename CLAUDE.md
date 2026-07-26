@@ -14,12 +14,13 @@ climblog-site/
 ├── privacy.html            # Privacy Policy  (legal copy - do not reword)
 ├── terms.html              # Terms of Use    (legal copy - do not reword)
 ├── support.html            # Support contact form
+├── beta.html               # Beta invites (noindex - not linked from the nav)
 ├── delete-account.html     # Account deletion instructions (store requirement)
 ├── 404.html                # 404 AND every /u/{username} friend invite
 ├── assets/
 │   ├── css/tokens.css      # Design tokens - the palette source of truth
 │   ├── css/site.css        # Reset, layout, shared components
-│   ├── js/site.js          # Store links, theme toggle, reveal, footer year
+│   ├── js/site.js          # Store + beta links, theme toggle, reveal, footer year
 │   └── img/                # Favicons + og.png (generated from og.svg)
 ├── design-system/          # Claude Design preview cards + build.mjs
 ├── .well-known/            # apple-app-site-association, assetlinks.json
@@ -81,9 +82,20 @@ generated HTML — edit `build.mjs` and rebuild.
 - **Store links are centralized.** `STORE_LINKS` at the top of
   `assets/js/site.js` is the only place URLs go. Elements carry
   `data-store="ios|android"`; empty URLs render a "Coming soon" chip instead of
-  a dead link.
+  a dead link. `BETA_LINKS` / `data-beta` works identically for the TestFlight
+  and Firebase App Distribution invites on `beta.html`, falling back to
+  "Invites opening soon".
+- **`beta.html` is deliberately unlisted.** It carries `noindex, nofollow` and
+  is kept out of the nav, because both invite URLs admit anyone who has them
+  (public TestFlight link, App Distribution link). It is still linked from the
+  footer and from two spots on the homepage, and is shareable by URL. Drop the
+  noindex at GA.
 - Pages are hand-maintained HTML. Nav and footer markup is duplicated across
-  files by necessity — change one, change all six.
+  files by necessity — change one, change all six (404.html has no nav).
+- **Nav layout.** The theme toggle is a sibling of `.nav-links`, not a list
+  item: `.nav-links` takes `margin-left: auto` so desktop reads as one
+  right-aligned group, and under 640px flex `order` pulls the toggle up beside
+  the brand while the links take their own full-width row.
 
 ## Gotchas
 
