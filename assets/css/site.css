@@ -210,7 +210,10 @@ h3 { font-size: var(--cl-text-lg); }
    base size. The svg sizes here override the width/height attributes in the
    markup, so the mark scales without touching seven files. */
 .site-nav .nav-brand { font-size: var(--cl-text-2xl); }
-.site-nav .nav-brand svg { width: 36px; height: 36px; }
+.site-nav .nav-brand svg { width: 44px; height: 44px; }
+
+/* Footer mark runs ahead of its wordmark too, just at a smaller step. */
+.site-footer .nav-brand svg { width: 28px; height: 28px; }
 
 .nav-links {
   display: flex;

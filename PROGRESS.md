@@ -88,7 +88,11 @@ needs to be fully private, those three are the remaining on-site entry points.
 Remove the noindex at GA.
 
 **Copy + type pass (same day, post-review).** Masthead lockup enlarged over three
-rounds, ending at 28px text (`--cl-text-2xl`) and a 36px mark. The size lives on
+rounds, ending at 28px text (`--cl-text-2xl`) and a 44px mark, with the footer mark
+taken to 28px against its unchanged 20px wordmark. The nav mark is now at its
+ceiling: 44px plus the 8px block padding exactly fills the 60px
+`--cl-nav-height`, so any further growth makes the sticky bar taller and the
+`scroll-margin-top` on anchor targets has to move with it. The size lives on
 `.site-nav .nav-brand` rather than `.nav-brand`, so the footer lockup keeps the
 smaller 20px/22px pairing. The svg rule overrides the width/height attributes in
 the markup, which avoids editing the same lockup across seven files. Dropped the trailing periods from the two hero
