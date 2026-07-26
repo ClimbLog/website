@@ -87,6 +87,15 @@ The footer "Beta" link and the two homepage mentions were kept - if the beta
 needs to be fully private, those three are the remaining on-site entry points.
 Remove the noindex at GA.
 
+**Copy + type pass (same day, post-review).** Nav wordmark up one step
+(`--cl-text-md` to `--cl-text-lg`, 17 to 20px - the footer brand shares the
+class and grew with it). Dropped the trailing periods from the two hero
+headlines, cut "Free to use. Altitude unlocks the premium extras." from the
+hero note, and corrected the beta exit copy: leaving the beta means deleting
+your account in the app, not deleting the app. A reported desktop gap between
+the nav links and the theme toggle did not reproduce - measured a constant 20px
+at seven widths from 700 to 1440px; it was a stale cache.
+
 **Verified** at 390px and desktop width, light and dark, no console errors, no
 horizontal overflow, theme toggle still switches and persists.
 

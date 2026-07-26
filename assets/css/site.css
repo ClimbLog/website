@@ -199,7 +199,7 @@ h3 { font-size: var(--cl-text-lg); }
   gap: var(--cl-space-sm);
   color: #fff;
   text-decoration: none;
-  font-size: var(--cl-text-md);
+  font-size: var(--cl-text-lg);
   font-weight: var(--cl-weight-bold);
   letter-spacing: var(--cl-tracking-tight);
 }
