@@ -87,9 +87,11 @@ The footer "Beta" link and the two homepage mentions were kept - if the beta
 needs to be fully private, those three are the remaining on-site entry points.
 Remove the noindex at GA.
 
-**Copy + type pass (same day, post-review).** Nav wordmark up one step
-(`--cl-text-md` to `--cl-text-lg`, 17 to 20px - the footer brand shares the
-class and grew with it). Dropped the trailing periods from the two hero
+**Copy + type pass (same day, post-review).** Masthead lockup enlarged in two
+rounds, ending at 24px text (`--cl-text-xl`) and a 30px mark. The size lives on
+`.site-nav .nav-brand` rather than `.nav-brand`, so the footer lockup keeps the
+smaller 20px/22px pairing. The svg rule overrides the width/height attributes in
+the markup, which avoids editing the same lockup across seven files. Dropped the trailing periods from the two hero
 headlines, cut "Free to use. Altitude unlocks the premium extras." from the
 hero note, and corrected the beta exit copy: leaving the beta means deleting
 your account in the app, not deleting the app. A reported desktop gap between

@@ -206,6 +206,12 @@ h3 { font-size: var(--cl-text-lg); }
 .nav-brand:hover { color: #fff; }
 .nav-brand svg { color: var(--cl-brand); }
 
+/* The masthead lockup runs larger than the footer one, which keeps .nav-brand's
+   base size. The svg sizes here override the width/height attributes in the
+   markup, so the mark scales without touching seven files. */
+.site-nav .nav-brand { font-size: var(--cl-text-xl); }
+.site-nav .nav-brand svg { width: 30px; height: 30px; }
+
 .nav-links {
   display: flex;
   align-items: center;
