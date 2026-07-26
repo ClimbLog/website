@@ -102,6 +102,13 @@ your account in the app, not deleting the app. A reported desktop gap between
 the nav links and the theme toggle did not reproduce - measured a constant 20px
 at seven widths from 700 to 1440px; it was a stale cache.
 
+**Tagline changed** to "Your flights, logged and shared" (was "Your travel
+life, mapped and remembered"). Hero headline, lede, and beta note rewritten to
+match, and the tagline was chased into the four places it also lived: the
+homepage `<title>`, `og:title`, `twitter:title`, the `404.html` description, and
+`og.svg` - which was re-rendered to `og.png` with the documented
+`rsvg-convert -w 1200 -h 630` command so shared links do not preview stale copy.
+
 **Verified** at 390px and desktop width, light and dark, no console errors, no
 horizontal overflow, theme toggle still switches and persists.
 

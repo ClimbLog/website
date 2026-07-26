@@ -44,8 +44,8 @@
   </g>
 
   <!-- headline -->
-  <text x="90" y="262" fill="#FFFFFF" font-size="60" font-weight="800" letter-spacing="-1.8">Your travel life,</text>
-  <text x="90" y="332" fill="#FFC840" font-size="60" font-weight="800" letter-spacing="-1.8">mapped and remembered.</text>
+  <text x="90" y="262" fill="#FFFFFF" font-size="60" font-weight="800" letter-spacing="-1.8">Your flights,</text>
+  <text x="90" y="332" fill="#FFC840" font-size="60" font-weight="800" letter-spacing="-1.8">logged and shared</text>
 
   <text x="90" y="400" fill="#FFFFFF" fill-opacity="0.68" font-size="24" font-weight="400">
     Log every flight. Build your route map. Share your Flight Passport.
