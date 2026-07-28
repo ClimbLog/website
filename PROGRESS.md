@@ -8,13 +8,33 @@ Work log for `climblog-site`. Stable project knowledge lives in `CLAUDE.md`.
 
 Full redesign shipped and live at https://climblog.co as of 2026-07-25.
 
-**2026-07-26:** mobile nav fix + new `beta.html`, with both live
-invite URLs already in `BETA_LINKS`. Verified rendering as real links, not the
-pending chip. Page is `noindex, nofollow` and is not in the nav, so it does not
-turn up in search - it is reached by URL, by the footer link, or from the two
-homepage mentions.
+**Working tree is clean and everything is pushed to `main`** as of 2026-07-27,
+head `ddeefcb`. Nothing is in flight.
 
-Next actions are in the backlog below, **P0 first** — both P0 items are launch
+**2026-07-26 to 07-27, all live:**
+- `beta.html` added - TestFlight + Firebase App Distribution invites, per
+  platform steps, `noindex, nofollow`, deliberately not in the nav. Reached by
+  URL, the footer link, or the two homepage mentions.
+- Android invite was rotated to `i/a52d4388a20ec83e` on 07-27. The earlier
+  `i/d98e7ae5c6ffa25b` is dead - anyone who was sent it needs a resend.
+- Mobile nav fix: theme toggle is a sibling of `.nav-links`, not a list item.
+- Masthead lockup enlarged to 28px text / 44px mark. **The mark is at its
+  ceiling** - 44px plus 8px block padding exactly fills the 60px
+  `--cl-nav-height`. Growing it further makes the sticky bar taller and
+  `scroll-margin-top` (76px) has to move with it.
+- Tagline changed to "Your flights, logged and shared" in all five places it
+  lives, including a re-rendered `og.png`.
+- Owner copy pass across features, friends, Passport, Altitude, CTA.
+- Feed sample: in-flight card first, chips recolored (blue = in the air, green
+  = on time, purple = follow flight, keyed to `#5F4BD7`).
+- Hero text column widened to `1.25fr` so "logged and shared" holds one line -
+  it was missing by one pixel. Lengthening that headline reintroduces the wrap.
+
+**Open question left with the owner:** the Altitude list now advertises delay
+and gate-change push notifications and drops historical lookup and satellite
+maps. Worth confirming that matches what Altitude actually gates in the app.
+
+Next actions are in the backlog below, **P0 first** - both P0 items are launch
 blockers that are currently invisible to visitors, so they are easy to forget:
 the store buttons render "Coming soon" chips, and the support form silently
 discards every message.
