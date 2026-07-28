@@ -83,6 +83,12 @@ h3 { font-size: var(--cl-text-lg); }
   text-wrap: pretty;
 }
 
+/* Headings carry no bottom margin of their own, so a paragraph set directly
+   under one sits right against it. This is the breathing room. */
+h2 + .lede,
+h2 + p,
+.page-header h1 + p { margin-top: var(--cl-space-md); }
+
 /* ---- Buttons ------------------------------------------------------------- */
 
 .btn {
