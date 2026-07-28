@@ -20,7 +20,7 @@ const STORE_LINKS = {
    ------------------------------------------------------------------------ */
 const BETA_LINKS = {
   ios: 'https://testflight.apple.com/join/8RqTZfRQ',
-  android: 'https://appdistribution.firebase.dev/i/d98e7ae5c6ffa25b',
+  android: 'https://appdistribution.firebase.dev/i/a52d4388a20ec83e',
 };
 
 (function applyStoreLinks() {
