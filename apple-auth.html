@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <!-- The sign-in result is in this page's URL fragment: never send it on. -->
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; form-action 'none'" />
+  <title>Back to ClimbLog</title>
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: var(--cl-space-xl);
+      text-align: center;
+    }
+    .card { max-width: 380px; }
+    h1 { font-size: 1.5rem; margin-bottom: var(--cl-space-md); }
+    p { margin-bottom: var(--cl-space-xl); opacity: 0.8; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="ctx-charcoal">
+  <!--
+    Android Apple sign-in return (ClimbLog audit C09-03).
+
+    The relay sends ClimbLog builds here with the result in the URL fragment,
+    which browsers never send to a server. Normally Android opens ClimbLog
+    straight from this verified App Link and this page never loads. If it
+    does load, the button hands the result to ClimbLog by package name
+    (com.climblog.app), so no other app can receive it.
+  -->
+  <main class="card">
+    <h1>Finishing sign-in</h1>
+    <p id="msg">Tap below to go back to ClimbLog.</p>
+    <a id="open" class="btn btn-primary hidden" href="#">Open ClimbLog</a>
+  </main>
+  <script>
+    (function () {
+      var result = location.hash.slice(1);
+      // Drop the result from the address bar and history.
+      if (result) history.replaceState(null, '', location.pathname);
+      var msg = document.getElementById('msg');
+      var open = document.getElementById('open');
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      // The relay URL-encodes every value, so anything else (such as '#' or ';',
+      // which could add intent parameters) means the link wasn't made by it.
+      if (!result || /[^\w.~%=&+-]/.test(result) || !/(^|&)(id_token|error)=/.test(result)) {
+        msg.textContent = 'You can close this page and return to ClimbLog.';
+        return;
+      }
+      if (!isAndroid) {
+        msg.textContent = 'Open ClimbLog on your phone to finish signing in.';
+        return;
+      }
+      var intentUrl = 'intent://climblog.co/apple-auth?' + result +
+        '#Intent;scheme=https;package=com.climblog.app;end';
+      open.href = intentUrl;
+      open.classList.remove('hidden');
+      // Try straight away; Chrome may require the tap.
+      location.href = intentUrl;
+    })();
+  </script>
+</body>
+</html>

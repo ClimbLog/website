@@ -1,10 +1,13 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.climblog.app",
       "sha256_cert_fingerprints": [
+        "3F:69:72:DA:62:05:7C:D8:7D:9C:60:6E:72:59:C0:5E:4F:19:FA:F9:0A:5D:1F:2F:2E:D9:F3:1D:38:FF:00:37",
         "DA:C8:F5:41:4F:5D:0A:34:48:80:EA:E4:A4:7E:D3:C7:E9:81:2E:BC:5B:F3:A6:12:C3:46:97:C5:3F:D9:8C:9A",
         "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"
       ]

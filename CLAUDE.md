@@ -17,6 +17,7 @@ climblog-site/
 ├── beta.html               # Beta invites (noindex - not linked from the nav)
 ├── delete-account.html     # Account deletion instructions (store requirement)
 ├── 404.html                # 404 AND every /u/{username} friend invite
+├── apple-auth.html         # Android Apple sign-in return (App Link fallback; app audit C09-03)
 ├── assets/
 │   ├── css/tokens.css      # Design tokens - the palette source of truth
 │   ├── css/site.css        # Reset, layout, shared components
