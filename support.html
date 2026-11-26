@@ -76,19 +76,17 @@
   <div class="container">
     <p class="eyebrow" style="color: var(--cl-brand)">Support</p>
     <h1>How can we help?</h1>
-    <p>Send us a question and we will get back to you as soon as we can.</p>
+    <p>Email us at <a href="mailto:support@climblog.co">support@climblog.co</a> and we will get back to you as soon as we can.</p>
   </div>
 </header>
 
 <main id="main" class="page-body">
   <div class="container">
     <div class="card form-card">
-      <p class="intro">Fill out the form below and we will respond shortly. To delete your account, use the <a href="/delete-account.html">Delete Account</a> page instead.</p>
+      <p class="intro">Write to <a href="mailto:support@climblog.co">support@climblog.co</a>, or fill out the form below: <strong>Send message</strong> opens your email app with your message ready to send. To delete your account, see the <a href="/delete-account.html">Delete Account</a> page.</p>
 
-      <!-- TODO(launch): this form has no backend. `action` must point at a real
-           endpoint (Formspree, Cloud Function, etc.) before launch, or the page
-           silently discards every message a user sends. -->
-      <form action="#" method="POST">
+      <!-- No backend: the form composes an email to support@climblog.co. -->
+      <form id="support-form" action="mailto:support@climblog.co" method="GET">
         <div class="form-group">
           <label for="name">Full name</label>
           <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" required />
@@ -121,6 +119,22 @@
           <button type="submit" class="btn btn-primary">Send message</button>
         </div>
       </form>
+      <p class="intro" id="support-fallback" hidden>If your email app didn't open, email <a href="mailto:support@climblog.co">support@climblog.co</a> directly.</p>
+      <script>
+        (function () {
+          var form = document.getElementById('support-form');
+          if (!form) return;
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var topic = form.subject.options[form.subject.selectedIndex].text;
+            var body = form.message.value + '\n\n— ' + form.name.value + ' (' + form.email.value + ')';
+            window.location.href = 'mailto:support@climblog.co'
+              + '?subject=' + encodeURIComponent('ClimbLog support: ' + topic)
+              + '&body=' + encodeURIComponent(body);
+            document.getElementById('support-fallback').hidden = false;
+          });
+        })();
+      </script>
     </div>
   </div>
 </main>
